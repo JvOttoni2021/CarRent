@@ -1,5 +1,4 @@
-﻿using CarRent.API.Domain.Values;
-
+﻿
 namespace CarRent.API.Domain.Entity
 {
     public class Rental

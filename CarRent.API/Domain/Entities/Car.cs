@@ -6,6 +6,6 @@
         public string Model { get; set; }
         public string CarMaker { get; set; }
         public int Year { get; set; }
-        private bool Available { get; set; } = true;
+        public bool Available { get; set; } = true;
     }
 }
