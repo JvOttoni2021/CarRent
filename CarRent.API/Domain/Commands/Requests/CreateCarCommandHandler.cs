@@ -18,7 +18,7 @@ namespace CarRent.API.Domain.Commands.Requests
             var car = new Car
             {
                 Model = request.Model,
-                CarMaker = request.CarMaker,
+                Maker = request.Maker,
                 Year = request.Year
             };
 
