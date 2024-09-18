@@ -2,7 +2,7 @@
 using CarRent.API.Domain.Entity;
 using MediatR;
 
-namespace CarRent.API.Domain.Commands.Requests
+namespace CarRent.API.Domain.Commands.Requests.CustomerCommands
 {
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Customer>
     {

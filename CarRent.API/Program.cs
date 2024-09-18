@@ -8,8 +8,12 @@ using CarRent.API.Application.Behavior;
 using CarRent.API;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using CarRent.API.Domain.Commands.Requests.RentalCommands;
+using CarRent.API.Domain.Service;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<RentService>();
 
 builder.Services.AddMediatR(configuration =>
 {
@@ -21,6 +25,7 @@ builder.Services.AddTransient<CarRentContext>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IRentalRepository, RentalRepository>();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 

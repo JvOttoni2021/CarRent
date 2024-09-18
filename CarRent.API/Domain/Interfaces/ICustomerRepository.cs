@@ -6,5 +6,6 @@ namespace CarRent.API.Domain.Interfaces
     {
         IEnumerable<Customer> GetCustomers();
         public bool CpfExists(string cpf);
+        public Customer? GetCustomerById(int Id);
     }
 }

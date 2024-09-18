@@ -1,4 +1,4 @@
-﻿using CarRent.API.Domain.Commands.Requests;
+﻿using CarRent.API.Domain.Commands.Requests.CustomerCommands;
 using CarRent.API.Domain.Interfaces;
 using FluentValidation;
 

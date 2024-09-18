@@ -1,4 +1,6 @@
-﻿using CarRent.API.Domain.Commands.Requests;
+﻿using CarRent.API.Application.Repositories;
+using CarRent.API.Domain.Commands.Requests.CustomerCommands;
+using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +18,19 @@ namespace CarRent.API.Web.Controllers
         {
             this._customerRepository = customerRepository;
             this._sender = sender;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Customer>))]
+        public IActionResult GetCustomers()
+        {
+            var customers = _customerRepository.GetCustomers();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(customers);
         }
 
         [HttpPost]

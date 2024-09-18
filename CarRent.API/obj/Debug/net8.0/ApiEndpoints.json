@@ -29,7 +29,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Domain.Commands.Requests.CreateCarCommand",
+        "Type": "CarRent.API.Domain.Commands.Requests.CarCommands.CreateCarCommand",
         "IsRequired": true
       }
     ],
@@ -63,6 +63,26 @@
   },
   {
     "ContainingType": "CarRent.API.Web.Controllers.CustomerController",
+    "Method": "GetCustomers",
+    "RelativePath": "api/Customer",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CarRent.API.Domain.Entity.Customer, CarRent.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.CustomerController",
     "Method": "CreateCar",
     "RelativePath": "api/Customer",
     "HttpMethod": "POST",
@@ -71,7 +91,53 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Domain.Commands.Requests.CreateCustomerCommand",
+        "Type": "CarRent.API.Domain.Commands.Requests.CustomerCommands.CreateCustomerCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.RentalController",
+    "Method": "GetRentals",
+    "RelativePath": "api/Rental",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CarRent.API.Domain.Entity.Rental, CarRent.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.RentalController",
+    "Method": "CreateRental",
+    "RelativePath": "api/Rental",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CarRent.API.Domain.Commands.Requests.RentalCommands.CreateRentalCommand",
         "IsRequired": true
       }
     ],

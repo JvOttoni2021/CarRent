@@ -23,7 +23,7 @@ namespace CarRent.API.Application.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(connectionString);
+                .UseSqlServer(connectionString).UseLazyLoadingProxies();
         }
     }
 }

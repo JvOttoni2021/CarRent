@@ -3,7 +3,7 @@ using CarRent.API.Domain.Entity;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace CarRent.API.Domain.Commands.Responses
+namespace CarRent.API.Domain.Commands.Responses.CarQueries
 {
     public class GetCarByIdQueryHandler : IRequestHandler<GetCarByIdQuery, Car?>
     {

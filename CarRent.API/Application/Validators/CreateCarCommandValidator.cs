@@ -1,4 +1,4 @@
-﻿using CarRent.API.Domain.Commands.Requests;
+﻿using CarRent.API.Domain.Commands.Requests.CarCommands;
 using CarRent.API.Domain.Entity;
 using FluentValidation;
 
@@ -21,4 +21,5 @@ namespace CarRent.API.Application.Validators
                 .InclusiveBetween(1960, DateTime.Now.Year + 2).WithMessage("Ano inválido");
         }
     }
+
 }

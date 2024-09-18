@@ -16,12 +16,14 @@ namespace CarRent.API.Application.Repositories
 
         public IEnumerable<Customer> GetCustomers()
         {
-            throw new NotImplementedException();
+            return _context.Customers.ToArray();
         }
 
         public bool CpfExists(string cpf)
         {
             return _context.Customers.Any(c => c.Cpf == cpf);
         }
+
+        public Customer? GetCustomerById(int id) => _context.Customers.Where(c => c.Id == id).FirstOrDefault();
     }
 }
