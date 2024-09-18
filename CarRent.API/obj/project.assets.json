@@ -127,25 +127,6 @@
           }
         }
       },
-      "Hellang.Middleware.ProblemDetails/6.5.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Reflection.Metadata": "5.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Hellang.Middleware.ProblemDetails.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/Hellang.Middleware.ProblemDetails.dll": {
-            "related": ".xml"
-          }
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
-      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1126,7 +1107,7 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/System.Collections.Immutable.dll": {
+          "lib/net6.0/_._": {
             "related": ".xml"
           }
         },
@@ -1423,7 +1404,7 @@
           "System.Collections.Immutable": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/System.Reflection.Metadata.dll": {
+          "lib/net6.0/_._": {
             "related": ".xml"
           }
         },
@@ -1832,24 +1813,6 @@
         "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.xml",
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll",
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
-      ]
-    },
-    "Hellang.Middleware.ProblemDetails/6.5.1": {
-      "sha512": "LgceF4mPguB/q3NWs6T3bitOFnYIANSRvfhASMgVb8ks7fSqY8jbdBHoVEuUDmxg3T7+kF21qSE0jQv9hdpLng==",
-      "type": "package",
-      "path": "hellang.middleware.problemdetails/6.5.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "hellang.middleware.problemdetails.6.5.1.nupkg.sha512",
-        "hellang.middleware.problemdetails.nuspec",
-        "lib/net5.0/Hellang.Middleware.ProblemDetails.dll",
-        "lib/net5.0/Hellang.Middleware.ProblemDetails.xml",
-        "lib/net6.0/Hellang.Middleware.ProblemDetails.dll",
-        "lib/net6.0/Hellang.Middleware.ProblemDetails.xml",
-        "lib/netcoreapp3.1/Hellang.Middleware.ProblemDetails.dll",
-        "lib/netcoreapp3.1/Hellang.Middleware.ProblemDetails.xml",
-        "problem-logo.png"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -4626,7 +4589,6 @@
     "net8.0": [
       "EntityFramework >= 6.5.1",
       "FluentValidation.AspNetCore >= 11.3.0",
-      "Hellang.Middleware.ProblemDetails >= 6.5.1",
       "MediatR >= 12.4.1",
       "Microsoft.Data.SqlClient >= 5.2.2",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
@@ -4691,10 +4653,6 @@
           "FluentValidation.AspNetCore": {
             "target": "Package",
             "version": "[11.3.0, )"
-          },
-          "Hellang.Middleware.ProblemDetails": {
-            "target": "Package",
-            "version": "[6.5.1, )"
           },
           "MediatR": {
             "target": "Package",

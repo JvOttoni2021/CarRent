@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CarRent.API.Domain.Commands.Requests
 {
-    public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, int>
+    public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, Car>
     {
         private readonly CarRentContext context;
 
@@ -13,7 +13,7 @@ namespace CarRent.API.Domain.Commands.Requests
             this.context = context;
         }
 
-        public async Task<int> Handle(CreateCarCommand request, CancellationToken cancellationToken)
+        public async Task<Car> Handle(CreateCarCommand request, CancellationToken cancellationToken)
         {
             var car = new Car
             {
@@ -25,7 +25,7 @@ namespace CarRent.API.Domain.Commands.Requests
             context.Cars.Add(car);
             await context.SaveChangesAsync();
 
-            return car.Id;
+            return car;
         }
     }
 }

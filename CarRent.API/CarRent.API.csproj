@@ -9,7 +9,6 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
@@ -24,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Commands\Requests\" />
     <Folder Include="Domain\Validators\" />
     <Folder Include="Infraestructure\" />
     <Folder Include="Migrations\" />

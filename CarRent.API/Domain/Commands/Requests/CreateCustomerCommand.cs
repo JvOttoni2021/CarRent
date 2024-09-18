@@ -3,5 +3,5 @@ using MediatR;
 
 namespace CarRent.API.Domain.Commands.Requests
 {
-    public record CreateCarCommand(string Model, string Maker, int Year) : IRequest<Car> { }
+    public record CreateCustomerCommand(string Name, string Cpf) : IRequest<Customer> { };
 }

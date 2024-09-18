@@ -36,8 +36,8 @@ namespace CarRent.API.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> CreateCar(CreateCarCommand command)
         {
-            var carId = await _sender.Send(command);
-            return Ok(carId);
+            var carToReturn = await _sender.Send(command);
+            return Ok(carToReturn);
         }
 
         [HttpGet("{id}")]

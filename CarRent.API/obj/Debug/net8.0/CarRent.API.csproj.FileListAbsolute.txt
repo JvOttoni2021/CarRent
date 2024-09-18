@@ -145,5 +145,4 @@ C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net8.0\CarRent.API
 C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net8.0\ref\CarRent.API.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
-C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Hellang.Middleware.ProblemDetails.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net8.0\CarRent.API.MvcApplicationPartsAssemblyInfo.cs

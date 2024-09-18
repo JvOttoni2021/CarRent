@@ -4,6 +4,6 @@
     {
         public IReadOnlyDictionary<string, string[]> Errors { get; set; }
 
-        public ValidationAppException(IReadOnlyDictionary<string, string[]> errors) : base("Erro de validação encontrado") => Errors = errors;
+        public ValidationAppException(IReadOnlyDictionary<string, string[]> errors) : base("One or more validation errors occurred") => Errors = errors;
     }
 }

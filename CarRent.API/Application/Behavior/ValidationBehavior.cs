@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CarRent.API.Application.Behavior
 {
-    public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public class ValidationBehavior<TRequest, TResult> : IPipelineBehavior<TRequest, TResult> where TRequest : IRequest<TResult>
     {
         public readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -13,15 +13,16 @@ namespace CarRent.API.Application.Behavior
             _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        public async Task<TResult> Handle(TRequest request, RequestHandlerDelegate<TResult> next, CancellationToken cancellationToken)
         {
+
             if (_validators.Any()) { 
                 return await next();
             }
 
             var context = new ValidationContext<TRequest>(request);
 
-            var errorsDictionaty = _validators
+            var errorsDictionary = _validators
                 .Select(x => x.Validate(context))
                 .SelectMany(x => x.Errors)
                 .Where(x => x is not null)
@@ -32,9 +33,9 @@ namespace CarRent.API.Application.Behavior
                     Values = errorMessages.Distinct().ToArray()
                 }).ToDictionary(x => x.Key, x => x.Values);
 
-            if (errorsDictionaty.Any())
+            if (errorsDictionary.Any())
             {
-                throw new ValidationAppException(errorsDictionaty);
+                throw new ValidationAppException(errorsDictionary);
             }
 
             return await next();

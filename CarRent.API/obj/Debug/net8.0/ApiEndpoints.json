@@ -60,5 +60,31 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.CustomerController",
+    "Method": "CreateCar",
+    "RelativePath": "api/Customer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CarRent.API.Domain.Commands.Requests.CreateCustomerCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -58,10 +58,6 @@
               "target": "Package",
               "version": "[11.3.0, )"
             },
-            "Hellang.Middleware.ProblemDetails": {
-              "target": "Package",
-              "version": "[6.5.1, )"
-            },
             "MediatR": {
               "target": "Package",
               "version": "[12.4.1, )"
