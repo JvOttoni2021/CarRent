@@ -1,6 +1,4 @@
-﻿using CarRent.API.Domain.Commands.Requests.CarCommands;
-using CarRent.API.Domain.Commands.Requests.RentalCommands;
-using CarRent.API.Domain.Commands.Responses.CarQueries;
+﻿using CarRent.API.Application.Commands.Requests.RentalCommands;
 using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using MediatR;

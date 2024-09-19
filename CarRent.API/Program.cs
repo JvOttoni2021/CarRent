@@ -1,19 +1,17 @@
-using CarRent.API.Application.Persistence;
-using CarRent.API.Application.Repositories;
 using CarRent.API.Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using MediatR;
 using CarRent.API.Application.Behavior;
 using CarRent.API;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
-using CarRent.API.Domain.Commands.Requests.RentalCommands;
-using CarRent.API.Domain.Service;
+using CarRent.API.Infraestructure.Persistence.Repositories;
+using CarRent.API.Infraestructure.Persistence.Persistence;
+using CarRent.API.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<RentService>();
+
+builder.Services.AddScoped<PaymentService>();
 
 builder.Services.AddMediatR(configuration =>
 {
@@ -25,17 +23,19 @@ builder.Services.AddTransient<CarRentContext>();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+
 builder.Services.AddScoped<IRentalRepository, RentalRepository>();
+
+builder.Services.AddScoped<IPaymentReceiptRepository, PaymentReceiptRepository>();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services
-    .AddControllers()
-    .AddFluentValidation(fv => fv.DisableDataAnnotationsValidation = true);
-
-builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+    .AddControllers();
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddEndpointsApiExplorer();
 

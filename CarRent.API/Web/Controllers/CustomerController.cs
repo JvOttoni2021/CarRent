@@ -1,5 +1,4 @@
-﻿using CarRent.API.Application.Repositories;
-using CarRent.API.Domain.Commands.Requests.CustomerCommands;
+﻿using CarRent.API.Application.Commands.Requests.CustomerCommands;
 using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using MediatR;

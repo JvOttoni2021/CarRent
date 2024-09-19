@@ -1,8 +1,8 @@
-﻿using CarRent.API.Application.Repositories;
-using CarRent.API.Domain.Commands.Requests.CustomerCommands;
-using CarRent.API.Domain.Commands.Requests.RentalCommands;
+﻿using CarRent.API.Application.Commands.Requests.RentalCommands;
 using CarRent.API.Domain.Interfaces;
 using FluentValidation;
+using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace CarRent.API.Application.Validators
 {
@@ -29,6 +29,15 @@ namespace CarRent.API.Application.Validators
                 {
                     return _customerRepository.GetCustomerById(id) is not null;
                 }).WithMessage("Cliente não existe");
+
+            RuleFor(p => p.ExpectedReturnDate)
+                .NotEmpty().WithMessage("Data prevista de retorno é obrigatória.")
+                .Must(BeAValidDateTimeFormat).WithMessage("Data inválida, deve seguir o formato 'YYYY-MM-DDTmm:HH:ss'");
+        }
+
+        private bool BeAValidDateTimeFormat(DateTime time)
+        {
+            return !time.Equals(default(DateTime));
         }
     }
 }

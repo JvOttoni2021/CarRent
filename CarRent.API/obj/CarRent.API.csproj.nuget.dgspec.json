@@ -54,9 +54,13 @@
               "target": "Package",
               "version": "[6.5.1, )"
             },
-            "FluentValidation.AspNetCore": {
+            "FluentValidation": {
               "target": "Package",
-              "version": "[11.3.0, )"
+              "version": "[8.6.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[8.6.0, )"
             },
             "MediatR": {
               "target": "Package",

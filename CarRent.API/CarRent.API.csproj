@@ -8,7 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.5.1" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="FluentValidation" Version="8.6.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
@@ -25,7 +26,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\Validators\" />
-    <Folder Include="Infraestructure\" />
+    <Folder Include="Infraestructure\Indentity\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

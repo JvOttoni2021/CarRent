@@ -1,6 +1,5 @@
-﻿using CarRent.API.Domain.Commands.Requests.CarCommands;
-using CarRent.API.Domain.Commands.Responses;
-using CarRent.API.Domain.Commands.Responses.CarQueries;
+﻿using CarRent.API.Application.Commands.Requests.CarCommands;
+using CarRent.API.Application.Commands.Responses.CarQueries;
 using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using MediatR;
@@ -35,7 +34,7 @@ namespace CarRent.API.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateCar(CreateCarCommand command)
+        public async Task<ActionResult<int>> CreateCar([FromBody] CreateCarCommand command)
         {
             var carToReturn = await _sender.Send(command);
             return Ok(carToReturn);

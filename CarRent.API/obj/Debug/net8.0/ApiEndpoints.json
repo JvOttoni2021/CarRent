@@ -29,7 +29,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Domain.Commands.Requests.CarCommands.CreateCarCommand",
+        "Type": "CarRent.API.Application.Commands.Requests.CarCommands.CreateCarCommand",
         "IsRequired": true
       }
     ],
@@ -91,13 +91,33 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Domain.Commands.Requests.CustomerCommands.CreateCustomerCommand",
+        "Type": "CarRent.API.Application.Commands.Requests.CustomerCommands.CreateCustomerCommand",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
         "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.PaymentReceiptController",
+    "Method": "GetPaymentReceipt",
+    "RelativePath": "api/PaymentReceipt",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CarRent.API.Domain.Entity.Customer, CarRent.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -137,7 +157,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Domain.Commands.Requests.RentalCommands.CreateRentalCommand",
+        "Type": "CarRent.API.Application.Commands.Requests.RentalCommands.CreateRentalCommand",
         "IsRequired": true
       }
     ],
