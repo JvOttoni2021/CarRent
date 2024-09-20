@@ -15,9 +15,9 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
             _context = context;
         }
 
-        public async Task CreatePaymentReceipt(Rental Rental, double RentValue, string Observation)
+        public async Task CreatePaymentReceipt(Rental Rental, decimal RentValue, string Observation)
         {
-            Console.WriteLine($"{Rental.Id} - Criando recibo para aluguel {Rental.Id}.");
+            Console.WriteLine($"{Rental.Id} - Criando recibo para locação {Rental.Id}.");
 
             PaymentReceipt newPayment = new PaymentReceipt
             {

@@ -24,7 +24,7 @@ namespace CarRent.API.Application.Commands.Requests.RentalCommands
 
         public async Task<Rental?> Handle(CreateRentalCommand request, CancellationToken cancellationToken)
         {
-            Console.WriteLine("Requisição recebida - Criar aluguel");
+            Console.WriteLine("Requisição recebida - Criar locação");
 
             Car? car = _carRepository.GetCarByIdAvailability(request.CarId, true);
             Customer? customer = _customerRepository.GetCustomerById(request.CustomerId);
@@ -38,7 +38,7 @@ namespace CarRent.API.Application.Commands.Requests.RentalCommands
 
             await _mediator.Publish(new RentalCreatedEvent(newRental.Id));
 
-            Console.WriteLine("Requisição finalizada - Criar aluguel");
+            Console.WriteLine("Requisição finalizada - Criar locação");
             return newRental;
         }
     }

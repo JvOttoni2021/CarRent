@@ -8,6 +8,6 @@ namespace CarRent.API.Domain.Interfaces
         IEnumerable<Car> GetCars();
         public Car? GetCarByIdAvailability(int id, bool availability);
         public Task<bool> setCarAvailability(int id, bool availability);
-        public Task<Car> CreateNewCar(string model, string maker, double dailyPrice, int year);
+        public Task<Car> CreateNewCar(string model, string maker, decimal dailyPrice, int year);
     }
 }

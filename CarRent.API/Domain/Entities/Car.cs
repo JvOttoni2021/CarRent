@@ -6,7 +6,7 @@
         public string? Model { get; set; }
         public string? Maker { get; set; }
         public int? Year { get; set; }
-        public double DailyPrice { get; set; }
+        public decimal DailyPrice { get; set; }
         public bool Available { get; set; } = true;
     }
 }

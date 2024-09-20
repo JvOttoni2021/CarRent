@@ -21,6 +21,11 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
             return _context.Rentals.Where(c => c.Id == Id).FirstOrDefault();
         }
 
+        public Rental? GetUnfinishedRentalById(int Id)
+        {
+            return _context.Rentals.Where(c => c.Id == Id && !c.CarReturned).FirstOrDefault();
+        }
+
         public IEnumerable<Rental> GetRentals()
         {
             return _context.Rentals.ToArray();
@@ -28,7 +33,7 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
 
         public async Task<Rental> CreateRental(Car car, Customer customer, DateTime expectedReturnDate)
         {
-            Console.WriteLine($"Criando aluguel para carro {car.Id}.");
+            Console.WriteLine($"Criando locação para carro {car.Id}.");
             var rental = new Rental
             {
                 RentedCar = car,
@@ -44,7 +49,7 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
             _context.Rentals.Add(rental);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine($"Aluguel {rental.Id} criado.");
+            Console.WriteLine($"Locação {rental.Id} criado.");
 
             return rental;
         }

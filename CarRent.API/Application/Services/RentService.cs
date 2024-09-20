@@ -21,7 +21,7 @@ namespace CarRent.API.Application.Services
 
         public async Task<Task> ProcessRentalCreation(int rentalId)
         {
-            Console.WriteLine($"{rentalId} - Reservando carro para aluguel {rentalId}.");
+            Console.WriteLine($"{rentalId} - Reservando carro para locação {rentalId}.");
 
 
             Rental? rental = _rentalRepository.GetRentalById(rentalId);

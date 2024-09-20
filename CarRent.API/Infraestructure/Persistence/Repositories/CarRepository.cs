@@ -36,7 +36,7 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
             return true;
         }
 
-        public async Task<Car> CreateNewCar(string model, string maker, double dailyPrice, int year)
+        public async Task<Car> CreateNewCar(string model, string maker, decimal dailyPrice, int year)
         {
             var newCar = new Car
             {
