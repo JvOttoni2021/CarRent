@@ -13,10 +13,14 @@ builder.Services.AddScoped<RentService>();
 
 builder.Services.AddScoped<PaymentService>();
 
+builder.Services.AddScoped<CarReturnedService>();
+
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssemblies(typeof(Program).Assembly);
 });
+
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<CarRentContext>();
 
@@ -30,8 +34,7 @@ builder.Services.AddScoped<IPaymentReceiptRepository, PaymentReceiptRepository>(
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
-builder.Services
-    .AddControllers();
+builder.Services.AddControllers();
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
@@ -41,13 +44,21 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Car Rental API V1");
+    });
+}
+
 app.UseExceptionHandler(opt => { });
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-// Mapeamento de controladores
 app.MapControllers();
 
 app.Run();

@@ -21,10 +21,16 @@ namespace CarRent.API.Application.Services
 
         public async Task<Task> ProcessRentalCreation(int rentalId)
         {
-            Rental? rental = _rentalRepository.GetRentalById(rentalId);
-            _ = _carRepository.setCarUnavailable(rental.RentedCar.Id);
-            Console.WriteLine("Aluguel criado.");
+            Console.WriteLine($"{rentalId} - Reservando carro para aluguel {rentalId}.");
 
+
+            Rental? rental = _rentalRepository.GetRentalById(rentalId);
+
+            await _mediator.Publish(new PaymentEvent(rental));
+
+            _ = _carRepository.setCarAvailability(rental.RentedCar.Id, false);
+
+            Console.WriteLine($"{rentalId} - Carro {rental.RentedCar.Id} reservado.");
             return Task.CompletedTask;
         }
     }

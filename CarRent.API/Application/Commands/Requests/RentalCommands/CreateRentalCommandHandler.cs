@@ -9,22 +9,24 @@ namespace CarRent.API.Application.Commands.Requests.RentalCommands
 {
     public class CreateRentalCommandHandler : IRequestHandler<CreateRentalCommand, Rental?>
     {
-        private readonly CarRentContext _context;
         private readonly ICarRepository _carRepository;
         private readonly ICustomerRepository _customerRepository;
+        private readonly IRentalRepository _rentalRepository;
         private readonly IMediator _mediator;
 
-        public CreateRentalCommandHandler(CarRentContext context, ICarRepository carRepository, ICustomerRepository customerRepository, IMediator mediator)
+        public CreateRentalCommandHandler(ICarRepository carRepository, ICustomerRepository customerRepository, IRentalRepository rentalRepository, IMediator mediator)
         {
-            _context = context;
             _carRepository = carRepository;
             _customerRepository = customerRepository;
+            _rentalRepository = rentalRepository;
             _mediator = mediator;
         }
 
         public async Task<Rental?> Handle(CreateRentalCommand request, CancellationToken cancellationToken)
         {
-            Car? car = _carRepository.GetAvailableCarById(request.CarId);
+            Console.WriteLine("Requisição recebida - Criar aluguel");
+
+            Car? car = _carRepository.GetCarByIdAvailability(request.CarId, true);
             Customer? customer = _customerRepository.GetCustomerById(request.CustomerId);
 
             if (car is null || customer is null)
@@ -32,26 +34,12 @@ namespace CarRent.API.Application.Commands.Requests.RentalCommands
                 return null;
             }
 
-            var rental = new Rental
-            {
-                RentedCar = car,
-                Customer = customer,
-                ExpectedReturnDate = request.ExpectedReturnDate,
-                RentalDate = DateTime.Now
-            };
+            Rental newRental = await _rentalRepository.CreateRental(car, customer, request.ExpectedReturnDate);
 
-            _context.Entry(car).State = EntityState.Unchanged;
-            _context.Entry(customer).State = EntityState.Unchanged;
+            await _mediator.Publish(new RentalCreatedEvent(newRental.Id));
 
-            _context.Rentals.Add(rental);
-            await _context.SaveChangesAsync();
-
-            await Task.WhenAll(
-                _mediator.Publish(new RentalCreatedEvent(rental.Id)),
-                _mediator.Publish(new PaymentEvent(rental))
-            );
-
-            return rental;
+            Console.WriteLine("Requisição finalizada - Criar aluguel");
+            return newRental;
         }
     }
 }

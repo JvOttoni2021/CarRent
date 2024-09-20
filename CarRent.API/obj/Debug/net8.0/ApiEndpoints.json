@@ -172,5 +172,31 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.RentalController",
+    "Method": "ReturnCar",
+    "RelativePath": "api/Rental",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CarRent.API.Application.Commands.Requests.RentalCommands.ReturnCarCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

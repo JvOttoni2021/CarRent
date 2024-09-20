@@ -1,11 +1,13 @@
-﻿using CarRent.API.Domain.Entity;
+﻿using Azure.Core;
+using CarRent.API.Domain.Entity;
 
 namespace CarRent.API.Domain.Interfaces
 {
     public interface ICarRepository
     {
         IEnumerable<Car> GetCars();
-        public Car? GetAvailableCarById(int Id);
-        public Task<bool> setCarUnavailable(int Id);
+        public Car? GetCarByIdAvailability(int id, bool availability);
+        public Task<bool> setCarAvailability(int id, bool availability);
+        public Task<Car> CreateNewCar(string model, string maker, double dailyPrice, int year);
     }
 }

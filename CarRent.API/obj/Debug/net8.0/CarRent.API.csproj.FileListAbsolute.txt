@@ -146,3 +146,8 @@ C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net8.0\ref\CarRent
 C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Castle.Core.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net8.0\CarRent.API.MvcApplicationPartsAssemblyInfo.cs

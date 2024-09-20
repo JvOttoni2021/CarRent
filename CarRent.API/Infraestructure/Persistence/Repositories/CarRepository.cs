@@ -1,4 +1,5 @@
-﻿using CarRent.API.Domain.Entity;
+﻿using Azure.Core;
+using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using CarRent.API.Infraestructure.Persistence.Persistence;
 
@@ -17,22 +18,38 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
             return _context.Cars.ToArray();
         }
 
-        public Car? GetAvailableCarById(int Id) => _context.Cars.Where(c => c.Id == Id && c.Available).FirstOrDefault();
+        public Car? GetCarByIdAvailability(int id, bool availability) => _context.Cars.Where(c => c.Id == id && c.Available == availability).FirstOrDefault();
 
-        public async Task<bool> setCarUnavailable(int CarId)
+        public async Task<bool> setCarAvailability(int carId, bool availability)
         {
-            Car? availableCar = GetAvailableCarById(CarId);
+            Car? availableCar = GetCarByIdAvailability(carId, !availability);
 
             if (availableCar is null)
             {
                 return false;
             }
 
-            availableCar.Available = false;
+            availableCar.Available = availability;
             _context.Cars.Update(availableCar);
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<Car> CreateNewCar(string model, string maker, double dailyPrice, int year)
+        {
+            var newCar = new Car
+            {
+                Model = model,
+                Maker = maker,
+                DailyPrice = dailyPrice,
+                Year = year
+            };
+
+            _context.Cars.Add(newCar);
+            await _context.SaveChangesAsync();
+
+            return newCar;
         }
     }
 }

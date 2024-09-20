@@ -1,12 +1,15 @@
-﻿namespace CarRent.API.Domain.Events
-{
-    public class CarReturnedEvent
-    {
-        public int RentalId { get; }
+﻿using CarRent.API.Domain.Entity;
+using MediatR;
 
-        public CarReturnedEvent(int rentalId)
+namespace CarRent.API.Domain.Events
+{
+    public class CarReturnedEvent : INotification
+    {
+        public Rental Rental { get; }
+
+        public CarReturnedEvent(Rental rental)
         {
-            this.RentalId = rentalId;
+            this.Rental = rental;
         }
     }
 }

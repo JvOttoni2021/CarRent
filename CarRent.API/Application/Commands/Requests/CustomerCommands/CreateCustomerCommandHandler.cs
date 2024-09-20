@@ -1,4 +1,5 @@
 ﻿using CarRent.API.Domain.Entity;
+using CarRent.API.Domain.Interfaces;
 using CarRent.API.Infraestructure.Persistence.Persistence;
 using MediatR;
 
@@ -6,25 +7,21 @@ namespace CarRent.API.Application.Commands.Requests.CustomerCommands
 {
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Customer>
     {
-        private readonly CarRentContext context;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CreateCustomerCommandHandler(CarRentContext context)
+        public CreateCustomerCommandHandler(ICustomerRepository customerRepository)
         {
-            this.context = context;
+            _customerRepository = customerRepository;
         }
 
         public async Task<Customer> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = new Customer
-            {
-                Name = request.Name,
-                Cpf = request.Cpf
-            };
+            Console.WriteLine("Requisição recebida - Criar cliente.");
+            Customer newCustomer = await _customerRepository.CreateCustomer(request.Name, request.Cpf);
 
-            context.Customers.Add(customer);
-            await context.SaveChangesAsync();
-
-            return customer;
+            Console.WriteLine($"Cliente {newCustomer.Id} criado.\n" +
+                $"Requisição finalizada - Criar cliente.");
+            return newCustomer;
         }
     }
 }

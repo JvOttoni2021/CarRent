@@ -1,4 +1,5 @@
 ﻿using CarRent.API.Domain.Entity;
+using CarRent.API.Domain.Interfaces;
 using CarRent.API.Infraestructure.Persistence.Persistence;
 using MediatR;
 
@@ -6,27 +7,21 @@ namespace CarRent.API.Application.Commands.Requests.CarCommands
 {
     public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, Car>
     {
-        private readonly CarRentContext context;
+        private readonly ICarRepository _carRepository;
 
-        public CreateCarCommandHandler(CarRentContext context)
+        public CreateCarCommandHandler(ICarRepository carRepository)
         {
-            this.context = context;
+            _carRepository = carRepository;
         }
 
         public async Task<Car> Handle(CreateCarCommand request, CancellationToken cancellationToken)
         {
-            var car = new Car
-            {
-                Model = request.Model,
-                Maker = request.Maker,
-                DailyPrice = request.DailyPrice,
-                Year = request.Year
-            };
+            Console.WriteLine("Requisição recebida - Criar carro.");
+            Car newCar = await _carRepository.CreateNewCar(request.Model, request.Maker, request.DailyPrice, request.Year);
 
-            context.Cars.Add(car);
-            await context.SaveChangesAsync();
-
-            return car;
+            Console.WriteLine($"Carro {newCar.Id} criado.\n" +
+                $"Requisição finalizada - Criar carro.");
+            return newCar;
         }
     }
 }

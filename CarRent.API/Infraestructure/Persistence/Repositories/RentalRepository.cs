@@ -1,6 +1,9 @@
-﻿using CarRent.API.Domain.Entity;
+﻿using Azure.Core;
+using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using CarRent.API.Infraestructure.Persistence.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace CarRent.API.Infraestructure.Persistence.Repositories
 {
@@ -21,6 +24,40 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
         public IEnumerable<Rental> GetRentals()
         {
             return _context.Rentals.ToArray();
+        }
+
+        public async Task<Rental> CreateRental(Car car, Customer customer, DateTime expectedReturnDate)
+        {
+            Console.WriteLine($"Criando aluguel para carro {car.Id}.");
+            var rental = new Rental
+            {
+                RentedCar = car,
+                Customer = customer,
+                ExpectedReturnDate = expectedReturnDate,
+                RentalDate = DateTime.Now,
+                ReturnDate = null
+            };
+
+            _context.Entry(car).State = EntityState.Unchanged;
+            _context.Entry(customer).State = EntityState.Unchanged;
+
+            _context.Rentals.Add(rental);
+            await _context.SaveChangesAsync();
+
+            Console.WriteLine($"Aluguel {rental.Id} criado.");
+
+            return rental;
+        }
+
+        public async Task<Rental> ReturnCar(Rental rental)
+        {
+            rental.CarReturned = true;
+            rental.ReturnDate = DateTime.Now;
+
+            _context.Rentals.Update(rental);
+            await _context.SaveChangesAsync();
+
+            return rental;
         }
     }
 }

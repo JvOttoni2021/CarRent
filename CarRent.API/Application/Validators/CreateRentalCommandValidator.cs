@@ -1,8 +1,6 @@
 ﻿using CarRent.API.Application.Commands.Requests.RentalCommands;
 using CarRent.API.Domain.Interfaces;
 using FluentValidation;
-using Microsoft.AspNetCore.Http;
-using System.Globalization;
 
 namespace CarRent.API.Application.Validators
 {
@@ -17,27 +15,22 @@ namespace CarRent.API.Application.Validators
             _customerRepository = customerRepository;
 
             RuleFor(p => p.CarId)
-                .NotNull().WithMessage("Identificador de carro é obrigatório")
+                .NotNull().WithMessage("Identificador de carro é obrigatório.")
                 .Must(id =>
                 {
-                    return _carRepository.GetAvailableCarById(id) is not null;
-                }).WithMessage("Carro não existe ou não está disponível");
+                    return _carRepository.GetCarByIdAvailability(id, true) is not null;
+                }).WithMessage("Carro não existe ou não está disponível.");
 
             RuleFor(p => p.CustomerId)
-                .NotNull().WithMessage("Identificador de carro é obrigatório")
+                .NotNull().WithMessage("Identificador de carro é obrigatório.")
                 .Must(id =>
                 {
                     return _customerRepository.GetCustomerById(id) is not null;
-                }).WithMessage("Cliente não existe");
+                }).WithMessage("Cliente não existe.");
 
             RuleFor(p => p.ExpectedReturnDate)
                 .NotEmpty().WithMessage("Data prevista de retorno é obrigatória.")
-                .Must(BeAValidDateTimeFormat).WithMessage("Data inválida, deve seguir o formato 'YYYY-MM-DDTmm:HH:ss'");
-        }
-
-        private bool BeAValidDateTimeFormat(DateTime time)
-        {
-            return !time.Equals(default(DateTime));
+                .Must(x => x > DateTime.Now).WithMessage("Data prevista de retorno deve ser uma data futura.");
         }
     }
 }

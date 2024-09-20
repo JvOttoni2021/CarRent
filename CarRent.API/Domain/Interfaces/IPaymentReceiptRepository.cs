@@ -7,6 +7,6 @@ namespace CarRent.API.Domain.Interfaces
     {
 
         public IEnumerable<PaymentReceipt> GetPaymentReceipts();
-        public Task CreatePaymentReceipt(Rental rental, double rentValue, string Observation);
+        public Task CreatePaymentReceipt(Rental rental, double rentValue, string observation);
     }
 }

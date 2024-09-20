@@ -8,6 +8,7 @@ namespace CarRent.API.Domain.Entity
         public virtual Customer Customer { get; set; }
         public DateTime RentalDate { get; set; }
         public DateTime ExpectedReturnDate { get; set; }
-        public bool CarReturned { get; private set; }
+        public DateTime? ReturnDate { get; set; }
+        public bool CarReturned { get; set; }
     }
 }

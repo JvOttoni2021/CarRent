@@ -17,31 +17,21 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
 
         public async Task CreatePaymentReceipt(Rental Rental, double RentValue, string Observation)
         {
-            Console.WriteLine("Criando recibo.");
-            Console.WriteLine($"RentalDate: {Rental.RentalDate}");
-            Console.WriteLine($"ExpectedReturnDate: {Rental.ExpectedReturnDate}");
+            Console.WriteLine($"{Rental.Id} - Criando recibo para aluguel {Rental.Id}.");
+
             PaymentReceipt newPayment = new PaymentReceipt
             {
                 Rental = Rental,
                 Observation = Observation,
-                Emission = new DateTime(2024, 9, 18),
+                Emission = DateTime.Now,
                 RentValue = RentValue
             };
 
             _context.Entry(Rental).State = EntityState.Unchanged;
             _context.PaymentReceipts.Add(newPayment);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro ao salvar: {ex.Message}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-            }
+            await _context.SaveChangesAsync();
+
+            Console.WriteLine($"{Rental.Id} - Recibo {newPayment.Id} criado.");
         }
 
         public IEnumerable<PaymentReceipt> GetPaymentReceipts()

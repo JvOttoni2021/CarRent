@@ -38,5 +38,14 @@ namespace CarRent.API.Web.Controllers
             var rentalToReturn = await _sender.Send(command);
             return Ok(rentalToReturn);
         }
+
+        [HttpPut]
+        public async Task<ActionResult<int>> ReturnCar(ReturnCarCommand command)
+        {
+            Console.WriteLine("Requisição recebida - Devolução de automóvel");
+            var rentalToReturn = await _sender.Send(command);
+            Console.WriteLine("Requisição finalizada - Devolução de automóvel");
+            return Ok(rentalToReturn.Id);
+        }
     }
 }

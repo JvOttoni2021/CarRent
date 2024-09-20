@@ -17,8 +17,7 @@ namespace CarRent.API.Application.Validators
                 .Length(1, 100).WithMessage("Marca deve ter entre 1 e 100 caracteres.");
 
             RuleFor(p => p.DailyPrice)
-                .GreaterThan(0).WithMessage("O preço diário deve ser um valor maior que 0.")
-                .ScalePrecision(2, 18).WithMessage("O preço diário deve ser um número de ponto flutuante válido.");
+                .GreaterThan(0).WithMessage("O preço diário deve ser um valor maior que 0.");
 
             RuleFor(p => p.Year)
                 .NotNull().WithMessage("Ano não informado")
