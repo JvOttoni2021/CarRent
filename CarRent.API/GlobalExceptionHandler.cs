@@ -1,4 +1,4 @@
-﻿using CarRent.API.Exceptions;
+﻿using CarRent.Application.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace CarRent.API

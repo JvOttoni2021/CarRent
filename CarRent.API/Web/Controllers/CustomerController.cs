@@ -1,8 +1,7 @@
-﻿using CarRent.API.Application.Commands.CustomerCommands;
-using CarRent.API.Application.Queries.CarQueries;
-using CarRent.API.Application.Queries.CustomerQueries;
-using CarRent.API.Domain.Entity;
-using CarRent.API.Domain.Interfaces;
+﻿using AutoMapper;
+using CarRent.Application.Commands.CustomerCommands;
+using CarRent.Application.Dtos;
+using CarRent.Application.Queries.CustomerQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,31 +12,45 @@ namespace CarRent.API.Web.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ISender _sender;
+        private readonly IMapper _mapper;
 
-        public CustomerController(ISender sender)
+        public CustomerController(ISender sender, IMapper mapper)
         {
             this._sender = sender;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
             var customers = await _sender.Send(new GetCustomersQuery());
-            return Ok(customers);
+            return Ok(_mapper.Map<IEnumerable<CustomerDto>>(customers));
         }
 
         [HttpPost]
         public async Task<ActionResult<int>> CreateCustomer(CreateCustomerCommand command)
         {
-            var customerToReturn = await _sender.Send(command);
-            return Ok(customerToReturn.Id);
+            var customer = await _sender.Send(command);
+
+            if (customer is null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(customer.Id);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCustomerById(int id)
         {
             var customer = await _sender.Send(new GetCustomerByIdQuery(id));
-            return Ok(customer);
+
+            if (customer is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<CustomerDto>(customer));
         }
     }
 }

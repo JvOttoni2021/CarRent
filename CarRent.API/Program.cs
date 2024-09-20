@@ -1,12 +1,12 @@
-using CarRent.API.Domain.Interfaces;
 using FluentValidation;
 using MediatR;
-using CarRent.API.Application.Behavior;
 using CarRent.API;
-using CarRent.API.Infraestructure.Persistence.Repositories;
-using CarRent.API.Infraestructure.Persistence.Persistence;
-using CarRent.API.Application.Services;
 using Microsoft.EntityFrameworkCore;
+using CarRent.Infrastructure.DbContext;
+using CarRent.Application.Services;
+using CarRent.Domain.Interfaces;
+using CarRent.Infraestructure.Repositories;
+using CarRent.Application.Behavior;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +16,15 @@ builder.Services.AddScoped<CarReturnedService>();
 
 builder.Services.AddMediatR(configuration =>
 {
-    configuration.RegisterServicesFromAssemblies(typeof(Program).Assembly);
+    configuration.RegisterServicesFromAssemblies(
+        typeof(CarRent.Application.Queries.CarQueries.GetCarsQuery).Assembly,
+        typeof(CarRent.Application.Commands.CarCommands.CreateCarCommand).Assembly,
+        typeof(CarRent.Domain.Events.RentalCreatedEvent).Assembly,
+        typeof(CarRent.Application.EventHandlers.CarReturnedEventHandler).Assembly
+        );
 });
+
+builder.Services.AddAutoMapper(typeof(CarRent.Application.Mappings.MappingProfile).Assembly);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -35,7 +42,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(CarRent.Application.Validators.CreateCarCommandValidator).Assembly);
 
 builder.Services.AddEndpointsApiExplorer();
 

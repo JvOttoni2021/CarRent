@@ -19,7 +19,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Application.Commands.CarCommands.CreateCarCommand",
+        "Type": "CarRent.Application.Commands.CarCommands.CreateCarCommand",
         "IsRequired": true
       }
     ],
@@ -45,7 +45,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Application.Commands.CarCommands.UpdateCarCommand",
+        "Type": "CarRent.Application.Commands.CarCommands.UpdateCarCommand",
         "IsRequired": true
       }
     ],
@@ -87,7 +87,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Application.Commands.CustomerCommands.CreateCustomerCommand",
+        "Type": "CarRent.Application.Commands.CustomerCommands.CreateCustomerCommand",
         "IsRequired": true
       }
     ],
@@ -130,6 +130,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CarRent.API.Web.Controllers.PaymentReceiptController",
+    "Method": "GetPaymentReceiptById",
+    "RelativePath": "api/PaymentReceipt/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CarRent.API.Web.Controllers.RentalController",
     "Method": "GetRentals",
     "RelativePath": "api/Rental",
@@ -149,7 +165,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Application.Commands.RentalCommands.CreateRentalCommand",
+        "Type": "CarRent.Application.Commands.RentalCommands.CreateRentalCommand",
         "IsRequired": true
       }
     ],
@@ -165,7 +181,23 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.API.Application.Commands.RentalCommands.ReturnCarCommand",
+        "Type": "CarRent.Application.Commands.RentalCommands.ReturnCarCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.RentalController",
+    "Method": "GetRentalById",
+    "RelativePath": "api/Rental/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

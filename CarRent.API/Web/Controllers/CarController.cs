@@ -1,7 +1,7 @@
-﻿using CarRent.API.Application.Commands.CarCommands;
-using CarRent.API.Application.Queries.CarQueries;
-using CarRent.API.Domain.Entity;
-using CarRent.API.Domain.Interfaces;
+﻿using AutoMapper;
+using CarRent.API.Dtos;
+using CarRent.Application.Commands.CarCommands;
+using CarRent.Application.Queries.CarQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,38 +12,58 @@ namespace CarRent.API.Web.Controllers
     public class CarController : ControllerBase
     {
         private readonly ISender _sender;
+        private readonly IMapper _mapper;
 
-        public CarController(ISender sender)
+        public CarController(ISender sender, IMapper mapper)
         {
-            this._sender = sender;
+            _sender = sender;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetCars()
         {
             var cars = await _sender.Send(new GetCarsQuery());
-            return Ok(cars);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<int>> CreateCar([FromBody] CreateCarCommand command)
-        {
-            var car = await _sender.Send(command);
-            return Ok(car.Id);
+            return Ok(_mapper.Map<IEnumerable<CarDto>>(cars));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCarById(int id)
         {
             var car = await _sender.Send(new GetCarByIdQuery(id));
-            return Ok(car);
+
+            if (car is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<CarDto>(car));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> CreateCar(CreateCarCommand command)
+        {
+            var car = await _sender.Send(command);
+
+            if (car is null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(car.Id);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCar(UpdateCarCommand command)
         {
             var car = await _sender.Send(command);
-            return Ok(car);
+
+            if (car is null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(car.Id);
         }
     }
 }

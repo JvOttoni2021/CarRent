@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domain\Validators\**" />
     <Compile Remove="Migrations\**" />
-    <Content Remove="Domain\Validators\**" />
     <Content Remove="Migrations\**" />
-    <EmbeddedResource Remove="Domain\Validators\**" />
     <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Domain\Validators\**" />
     <None Remove="Migrations\**" />
   </ItemGroup>
 
@@ -39,7 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infraestructure\Indentity\" />
+    <ProjectReference Include="..\CarRent.Application\CarRent.Application.csproj" />
+    <ProjectReference Include="..\CarRent.Domain\CarRent.Domain.csproj" />
+    <ProjectReference Include="..\CarRent.Infrastructure\CarRent.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

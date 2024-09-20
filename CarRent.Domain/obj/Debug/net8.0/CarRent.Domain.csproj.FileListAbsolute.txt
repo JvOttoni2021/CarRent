@@ -1,0 +1,13 @@
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\bin\Debug\net8.0\CarRent.Domain.deps.json
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\bin\Debug\net8.0\CarRent.Domain.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\bin\Debug\net8.0\CarRent.Domain.pdb
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.csproj.AssemblyReference.cache
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.AssemblyInfoInputs.cache
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.AssemblyInfo.cs
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.csproj.CoreCompileInputs.cache
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.sourcelink.json
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\refint\CarRent.Domain.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\CarRent.Domain.pdb
+C:\Users\João\source\repos\CarRent.API\CarRent.Domain\obj\Debug\net8.0\ref\CarRent.Domain.dll

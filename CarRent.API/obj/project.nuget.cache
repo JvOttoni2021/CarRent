@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3vO2TVNuuSg=",
+  "dgSpecHash": "SJXJlPzdW2o=",
   "success": true,
   "projectFilePath": "C:\\Users\\João\\source\\repos\\CarRent.API\\CarRent.API\\CarRent.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\João\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\João\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

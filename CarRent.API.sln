@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRent.API", "CarRent.API\CarRent.API.csproj", "{16E1B923-7537-43B0-98F7-3500C9D87D94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRent.API", "CarRent.API\CarRent.API.csproj", "{16E1B923-7537-43B0-98F7-3500C9D87D94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRent.Domain", "CarRent.Domain\CarRent.Domain.csproj", "{7414D593-73B3-4ADA-AA84-941E0808C2BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRent.Application", "CarRent.Application\CarRent.Application.csproj", "{42403E24-C3E7-4B64-ADD6-CEAF42F7260B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRent.Infrastructure", "CarRent.Infrastructure\CarRent.Infrastructure.csproj", "{9873D839-3FAF-4FF9-BBAF-99E22A597644}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{16E1B923-7537-43B0-98F7-3500C9D87D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16E1B923-7537-43B0-98F7-3500C9D87D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16E1B923-7537-43B0-98F7-3500C9D87D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7414D593-73B3-4ADA-AA84-941E0808C2BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7414D593-73B3-4ADA-AA84-941E0808C2BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7414D593-73B3-4ADA-AA84-941E0808C2BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7414D593-73B3-4ADA-AA84-941E0808C2BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42403E24-C3E7-4B64-ADD6-CEAF42F7260B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42403E24-C3E7-4B64-ADD6-CEAF42F7260B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42403E24-C3E7-4B64-ADD6-CEAF42F7260B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42403E24-C3E7-4B64-ADD6-CEAF42F7260B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9873D839-3FAF-4FF9-BBAF-99E22A597644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9873D839-3FAF-4FF9-BBAF-99E22A597644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9873D839-3FAF-4FF9-BBAF-99E22A597644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9873D839-3FAF-4FF9-BBAF-99E22A597644}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

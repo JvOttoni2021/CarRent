@@ -1,7 +1,8 @@
-﻿using CarRent.API.Application.Queries.PaymentReceiptQueries;
-using CarRent.API.Domain.Entity;
-using CarRent.API.Domain.Interfaces;
-using CarRent.API.Infraestructure.Persistence.Repositories;
+﻿using AutoMapper;
+using CarRent.Application.Dtos;
+using CarRent.Application.Queries.CustomerQueries;
+using CarRent.Application.Queries.PaymentReceiptQueries;
+using CarRent.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,32 @@ namespace CarRent.API.Web.Controllers
     public class PaymentReceiptController : ControllerBase
     {
         private readonly ISender _sender;
+        private readonly IMapper _mapper;
 
-        public PaymentReceiptController(ISender sender)
+        public PaymentReceiptController(ISender sender, IMapper mapper)
         {
-            this._sender = sender;
+            _sender = sender;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetPaymentReceipt()
         {
             var paymentReceipts = await _sender.Send(new GetPaymentReceiptsQuery());
-            return Ok(paymentReceipts);
+            return Ok(_mapper.Map<IEnumerable<PaymentReceiptDto>>(paymentReceipts));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPaymentReceiptById(int id)
+        {
+            var paymentReceipt = await _sender.Send(new GetPaymentReceiptByIdQuery(id));
+
+            if (paymentReceipt is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<PaymentReceiptDto>(paymentReceipt));
         }
     }
 }
