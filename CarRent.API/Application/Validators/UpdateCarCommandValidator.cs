@@ -1,13 +1,23 @@
 ﻿using CarRent.API.Application.Commands.CarCommands;
-using CarRent.API.Domain.Entity;
+using CarRent.API.Domain.Interfaces;
 using FluentValidation;
 
 namespace CarRent.API.Application.Validators
 {
-    public class CreateCarCommandValidator : AbstractValidator<CreateCarCommand>
+    public class UpdateCarCommandValidator : AbstractValidator<UpdateCarCommand>
     {
-        public CreateCarCommandValidator()
+        private readonly ICarRepository _carRepository;
+        public UpdateCarCommandValidator(ICarRepository carRepository)
         {
+            _carRepository = carRepository;
+
+            RuleFor(p => p.Id)
+                .NotEmpty().WithMessage("Identificador do carro é obrigatório")
+                .Must(id =>
+                {
+                    return _carRepository.GetCarById(id) is not null;
+                }).WithMessage("Carro não existe.");
+
             RuleFor(p => p.Model)
                 .NotNull().WithMessage("Modelo não informado.")
                 .Length(1, 100).WithMessage("Modelo deve ter entre 1 e 100 caracteres.");
@@ -24,5 +34,4 @@ namespace CarRent.API.Application.Validators
                 .InclusiveBetween(1960, DateTime.Now.Year + 2).WithMessage("Ano inválido.");
         }
     }
-
 }

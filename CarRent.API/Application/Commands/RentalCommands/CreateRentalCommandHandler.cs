@@ -5,7 +5,7 @@ using CarRent.API.Infraestructure.Persistence.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CarRent.API.Application.Commands.Requests.RentalCommands
+namespace CarRent.API.Application.Commands.RentalCommands
 {
     public class CreateRentalCommandHandler : IRequestHandler<CreateRentalCommand, Rental?>
     {

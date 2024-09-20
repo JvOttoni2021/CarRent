@@ -1,4 +1,5 @@
-﻿using CarRent.API.Domain.Entity;
+﻿using CarRent.API.Application.Queries.PaymentReceiptQueries;
+using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using CarRent.API.Infraestructure.Persistence.Repositories;
 using MediatR;
@@ -10,26 +11,18 @@ namespace CarRent.API.Web.Controllers
     [ApiController]
     public class PaymentReceiptController : ControllerBase
     {
-        private readonly IPaymentReceiptRepository _paymentReceiptRepository;
         private readonly ISender _sender;
 
-        public PaymentReceiptController(IPaymentReceiptRepository paymentReceiptRepository, ISender sender)
+        public PaymentReceiptController(ISender sender)
         {
-            this._paymentReceiptRepository = paymentReceiptRepository;
             this._sender = sender;
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Customer>))]
-        public IActionResult GetPaymentReceipt()
+        public async Task<IActionResult> GetPaymentReceipt()
         {
-            var customers = _paymentReceiptRepository.GetPaymentReceipts();
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            return Ok(customers);
+            var paymentReceipts = await _sender.Send(new GetPaymentReceiptsQuery());
+            return Ok(paymentReceipts);
         }
     }
 }

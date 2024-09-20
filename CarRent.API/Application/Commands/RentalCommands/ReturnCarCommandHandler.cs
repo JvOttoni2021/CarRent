@@ -4,7 +4,7 @@ using CarRent.API.Domain.Interfaces;
 using CarRent.API.Infraestructure.Persistence.Persistence;
 using MediatR;
 
-namespace CarRent.API.Application.Commands.Requests.RentalCommands
+namespace CarRent.API.Application.Commands.RentalCommands
 {
     public class ReturnCarCommandHandler : IRequestHandler<ReturnCarCommand, Rental?>
     {

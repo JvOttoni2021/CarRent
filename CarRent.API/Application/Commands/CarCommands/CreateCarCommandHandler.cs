@@ -3,7 +3,7 @@ using CarRent.API.Domain.Interfaces;
 using CarRent.API.Infraestructure.Persistence.Persistence;
 using MediatR;
 
-namespace CarRent.API.Application.Commands.Requests.CarCommands
+namespace CarRent.API.Application.Commands.CarCommands
 {
     public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, Car>
     {

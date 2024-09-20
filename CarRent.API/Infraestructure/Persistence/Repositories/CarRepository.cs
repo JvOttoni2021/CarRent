@@ -18,6 +18,8 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
             return _context.Cars.ToArray();
         }
 
+        public Car? GetCarById(int id) => _context.Cars.Where(c => c.Id == id).FirstOrDefault();
+
         public Car? GetCarByIdAvailability(int id, bool availability) => _context.Cars.Where(c => c.Id == id && c.Available == availability).FirstOrDefault();
 
         public async Task<bool> setCarAvailability(int carId, bool availability)
@@ -50,6 +52,27 @@ namespace CarRent.API.Infraestructure.Persistence.Repositories
             await _context.SaveChangesAsync();
 
             return newCar;
+        }
+
+        public async Task<Car?> UpdateCar(int id, string model, string maker, decimal dailyPrice, int year)
+        {
+            Car? car = this.GetCarById(id);
+
+            if (car is null)
+            {
+                return null;
+            }
+
+            car.Id = id;
+            car.Model = model;
+            car.Maker = maker;
+            car.DailyPrice = dailyPrice;
+            car.Year = year;
+
+            _context.Cars.Update(car);
+            await _context.SaveChangesAsync();
+
+            return car;
         }
     }
 }

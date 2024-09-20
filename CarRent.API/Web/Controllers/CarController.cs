@@ -1,5 +1,5 @@
-﻿using CarRent.API.Application.Commands.Requests.CarCommands;
-using CarRent.API.Application.Commands.Responses.CarQueries;
+﻿using CarRent.API.Application.Commands.CarCommands;
+using CarRent.API.Application.Queries.CarQueries;
 using CarRent.API.Domain.Entity;
 using CarRent.API.Domain.Interfaces;
 using MediatR;
@@ -11,39 +11,38 @@ namespace CarRent.API.Web.Controllers
     [ApiController]
     public class CarController : ControllerBase
     {
-        private readonly ICarRepository _carRepository;
         private readonly ISender _sender;
 
-        public CarController(ICarRepository carRepository, ISender sender)
+        public CarController(ISender sender)
         {
-            this._carRepository = carRepository;
             this._sender = sender;
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Car>))]
-        public IActionResult GetCars()
+        public async Task<IActionResult> GetCars()
         {
-            var cars = _carRepository.GetCars();
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var cars = await _sender.Send(new GetCarsQuery());
             return Ok(cars);
         }
 
         [HttpPost]
         public async Task<ActionResult<int>> CreateCar([FromBody] CreateCarCommand command)
         {
-            var carToReturn = await _sender.Send(command);
-            return Ok(carToReturn);
+            var car = await _sender.Send(command);
+            return Ok(car.Id);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCarById(int id)
         {
             var car = await _sender.Send(new GetCarByIdQuery(id));
+            return Ok(car);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCar(UpdateCarCommand command)
+        {
+            var car = await _sender.Send(command);
             return Ok(car);
         }
     }

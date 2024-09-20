@@ -1,4 +1,7 @@
-﻿namespace CarRent.API.Domain.Entity
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Text.Json.Serialization;
+
+namespace CarRent.API.Domain.Entity
 {
     public class Car
     {
@@ -8,5 +11,8 @@
         public int? Year { get; set; }
         public decimal DailyPrice { get; set; }
         public bool Available { get; set; } = true;
+
+        [JsonIgnore]
+        private ILazyLoader LazyLoader { get; set; }
     }
 }
