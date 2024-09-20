@@ -151,3 +151,9 @@ C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Swashbuckle
 C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net8.0\CarRent.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
