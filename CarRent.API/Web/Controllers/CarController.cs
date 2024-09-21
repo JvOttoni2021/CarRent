@@ -54,7 +54,7 @@ namespace CarRent.API.Web.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCar(UpdateCarCommand command)
+        public async Task<IActionResult> UpdateCarById(UpdateCarCommand command)
         {
             var car = await _sender.Send(command);
 

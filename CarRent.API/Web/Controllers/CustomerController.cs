@@ -28,7 +28,7 @@ namespace CarRent.API.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateCustomer(CreateCustomerCommand command)
+        public async Task<ActionResult> CreateCustomer(CreateCustomerCommand command)
         {
             var customer = await _sender.Send(command);
 

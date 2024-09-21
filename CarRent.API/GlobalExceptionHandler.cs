@@ -1,14 +1,34 @@
 ﻿using CarRent.Application.Exceptions;
-using Microsoft.AspNetCore.Diagnostics;
 
 namespace CarRent.API
 {
-    public class GlobalExceptionHandler : IExceptionHandler
+    public class GlobalExceptionHandler
     {
+        private readonly RequestDelegate _next;
+        private readonly ILogger<GlobalExceptionHandler> _logger;
 
-        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        public GlobalExceptionHandler(RequestDelegate next, ILogger<GlobalExceptionHandler> logger)
         {
-            httpContext.Response.ContentType = "application/json";
+            _next = next;
+            _logger = logger;
+        }
+
+        public async Task InvokeAsync(HttpContext httpContext)
+        {
+            try
+            {
+                await _next(httpContext);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An unhandled exception occurred.");
+                await HandleExceptionAsync(httpContext, ex);
+            }
+        }
+
+        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        {
+            context.Response.ContentType = "application/json";
 
             var excDetails = exception switch
             {
@@ -16,16 +36,17 @@ namespace CarRent.API
                 _ => (Detail: exception.Message, StatusCode: StatusCodes.Status500InternalServerError),
             };
 
-            httpContext.Response.StatusCode = excDetails.StatusCode;
+            context.Response.StatusCode = excDetails.StatusCode;
 
+            // Se for uma exceção de validação
             if (exception is ValidationAppException validationException)
             {
-                await httpContext.Response.WriteAsJsonAsync(new { validationException.Errors });
-
-                return true;
+                await context.Response.WriteAsJsonAsync(new { validationException.Errors });
             }
-
-            return false;
+            else
+            {
+                await context.Response.WriteAsJsonAsync(new { Error = excDetails.Detail });
+            }
         }
     }
 }

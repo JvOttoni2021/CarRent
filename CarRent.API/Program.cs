@@ -36,8 +36,6 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IRentalRepository, RentalRepository>();
 builder.Services.AddScoped<IPaymentReceiptRepository, PaymentReceiptRepository>();
 
-builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-
 builder.Services.AddControllers();
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
@@ -48,7 +46,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-app.UseExceptionHandler(opt => { });
+app.UseMiddleware<GlobalExceptionHandler>();
 
 app.UseHttpsRedirection();
 
