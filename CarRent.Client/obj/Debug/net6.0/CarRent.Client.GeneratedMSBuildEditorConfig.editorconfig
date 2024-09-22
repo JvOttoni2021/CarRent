@@ -38,6 +38,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2Fycy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-nr01juei02
 
+[C:/Users/João/source/repos/CarRent.API/CarRent.Client/Pages/Customers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3VzdG9tZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-atmyln4c3e
+
+[C:/Users/João/source/repos/CarRent.API/CarRent.Client/Pages/PaymentReceipts.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudFJlY2VpcHRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-1oekychqoe
+
+[C:/Users/João/source/repos/CarRent.API/CarRent.Client/Pages/Rentals.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVudGFscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-auwpzb850t
+
 [C:/Users/João/source/repos/CarRent.API/CarRent.Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-yclx04ya1c

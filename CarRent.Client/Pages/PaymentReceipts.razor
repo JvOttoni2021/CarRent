@@ -1,0 +1,30 @@
+﻿@page "/paymentReceipt"
+@attribute [Authorize]
+
+<h3>Pagamentos</h3>
+
+<div class="row">
+    @if (PaymentReceiptList.Any())
+    {
+        @foreach (var payment in PaymentReceiptList)
+        {
+            <div class="col-6 col-sm-12 col-md-6 col-lg-4 col-xl-4 mh-25 mb-4">
+                <div class="card shadow-sm rounded">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>@payment.Id</b></h5>
+                        <p class="card-text">Locação: @payment.Rental.Id</p>
+                        <p class="card-text">Cliente: @payment.Rental.Customer.Cpf - @payment.Rental.Customer.Name</p>
+                        <p class="card-text">Observação: @payment.Observation</p>
+                        <p class="card-text">Data: @payment.Emission</p>
+                        <p class="card-text">Valor: R$ @payment.RentValue</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Nenhuma locação encontrada.</p>
+    }
+
+</div>

@@ -12,7 +12,7 @@ namespace CarRent.API.Application.Validators
         {
             _rentalRepository = rentalRepository;
 
-            RuleFor(p => p.RentalId)
+            RuleFor(p => p.Id)
                 .NotEmpty().WithMessage("Identificador da locação é obrigatório")
                 .Must(id =>
                 {

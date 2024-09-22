@@ -52,3 +52,6 @@ C:\Users\João\source\repos\CarRent.API\CarRent.Client\bin\Debug\net6.0\Microsof
 C:\Users\João\source\repos\CarRent.API\CarRent.Client\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.Client\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\João\source\repos\CarRent.API\CarRent.Client\obj\Debug\net6.0\scopedcss\Shared\RedirectToLogin.razor.rz.scp.css
+C:\Users\João\source\repos\CarRent.API\CarRent.Client\obj\Debug\net6.0\scopedcss\Pages\Customers.razor.rz.scp.css
+C:\Users\João\source\repos\CarRent.API\CarRent.Client\obj\Debug\net6.0\scopedcss\Pages\Rentals.razor.rz.scp.css
+C:\Users\João\source\repos\CarRent.API\CarRent.Client\obj\Debug\net6.0\scopedcss\Pages\PaymentReceipts.razor.rz.scp.css

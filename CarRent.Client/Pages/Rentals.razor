@@ -1,0 +1,111 @@
+﻿@page "/rental"
+@attribute [Authorize]
+
+<h3>Locações</h3>
+
+<div style="margin-bottom: 10px;">
+    <h4>
+        <button class="btn btn-primary" @onclick="ToggleFormPostVisibility">
+            Adicionar nova locação
+        </button>
+    </h4>
+    @if (showPostForm)
+    {
+        <div class="card mt-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><b>Inclusão de nova locação.</b></h5>
+                <EditForm Model="newRental" OnValidSubmit="HandleValidPostSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="CarId" class="form-label">Identificador do carro</label>
+                        <InputNumber id="CarId" @bind-Value="newRental.CarId" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="CustomerId" class="form-label">Identificador do cliente</label>
+                        <InputNumber id="CustomerId" @bind-Value="newRental.CustomerId" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ExpectedReturnDate" class="form-label">Data prevista de devolução do carro.</label>
+                        <InputDate id="ExpectedReturnDate" @bind-Value="newRental.ExpectedReturnDate" class="form-control" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar informações</button>
+                </EditForm>
+                @if (errorMessage != "")
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>@errorMessage</li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div style="margin-bottom: 10px;">
+    <h4>
+        <button class="btn btn-primary" @onclick="ToggleFormPutVisibility">
+            Finalizar locação
+        </button>
+    </h4>
+    @if (showPutForm)
+    {
+        <div class="card mt-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><b>Finalização de locação.</b></h5>
+                <EditForm Model="updatedRental" OnValidSubmit="HandleValidPutSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="Id" class="form-label">Identificador</label>
+                        <InputNumber id="Id" @bind-Value="updatedRental.Id" class="form-control" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar informações</button>
+                </EditForm>
+                @if (errorMessagePut != "")
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>@errorMessagePut</li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row">
+    @if (RentalList.Any())
+    {
+        @foreach (var rental in RentalList)
+        {
+            <div class="col-6 col-sm-12 col-md-6 col-lg-4 col-xl-4 mh-25 mb-4">
+                <div class="card shadow-sm rounded">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>@rental.Id.ToString()</b></h5>
+                        <p class="card-text">[@rental.RentedCar.Id] @rental.RentedCar.Model - [@rental.Customer.Id] @rental.Customer.Name</p>
+                        <p class="card-text">Data de retirada: @rental.RentalDate</p>
+                        <p class="card-text">Data de retorno: @rental.ExpectedReturnDate</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span>Finalizado: @(rental.CarReturned ? $"Sim - {rental.ReturnDate}" : "Não")</span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Nenhuma locação encontrada.</p>
+    }
+
+</div>

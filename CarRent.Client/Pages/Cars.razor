@@ -1,45 +1,109 @@
 ﻿@page "/car"
 @attribute [Authorize]
 
-<h3>Cars</h3>
+<h3>Carros</h3>
 
-<div>
-    <h4>Adicionar Carro</h4>
-    <EditForm Model="newCar" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="mb-3">
-            <label for="maker" class="form-label">Fabricante</label>
-            <InputText id="maker" @bind-Value="newCar.Maker" class="form-control" required />
-        </div>
-
-        <div class="mb-3">
-            <label for="model" class="form-label">Modelo</label>
-            <InputText id="model" @bind-Value="newCar.Model" class="form-control" required />
-        </div>
-
-        <div class="mb-3">
-            <label for="dailyPrice" class="form-label">Preço</label>
-            <InputNumber id="dailyPrice" @bind-Value="newCar.DailyPrice" class="form-control" required />
-        </div>
-
-        <div class="mb-3">
-            <label for="year" class="form-label">Ano</label>
-            <InputNumber id="year" @bind-Value="newCar.Year" class="form-control" required />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Adicionar Carro</button>
-    </EditForm>
-    @if (errorMessages.Any())
+<div style="margin-bottom: 10px;">
+    <h4>
+        <button class="btn btn-primary" @onclick="ToggleFormPostVisibility">
+            Adicionar novo carro
+        </button>
+    </h4>
+    @if (showPostForm)
     {
-        <div class="alert alert-danger">
-            <ul>
-                @foreach (var message in errorMessages)
+        <div class="card mt-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><b>Inclusão de novo carro.</b></h5>
+                <EditForm Model="newCar" OnValidSubmit="HandleValidPostSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="maker" class="form-label">Fabricante</label>
+                        <InputText id="maker" @bind-Value="newCar.Maker" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="model" class="form-label">Modelo</label>
+                        <InputText id="model" @bind-Value="newCar.Model" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dailyPrice" class="form-label">Valor diário de aluguel</label>
+                        <InputNumber id="dailyPrice" @bind-Value="newCar.DailyPrice" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Ano</label>
+                        <InputNumber id="year" @bind-Value="newCar.Year" class="form-control" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar informações</button>
+                </EditForm>
+                @if (errorMessage != "")
                 {
-                    <li>@message</li>
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>@errorMessage</li>
+                        </ul>
+                    </div>
                 }
-            </ul>
+            </div>
+        </div>
+    }
+</div>
+
+<div style="margin-bottom: 10px;">
+    <h4>
+        <button class="btn btn-primary" @onclick="ToggleFormPutVisibility">
+            Alterar carro
+        </button>
+    </h4>
+    @if (showPutForm)
+    {
+        <div class="card mt-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><b>Alteração de carro existente.</b></h5>
+                <EditForm Model="updatedCar" OnValidSubmit="HandleValidPutSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="mb-3">
+                        <label for="id" class="form-label">Identificador</label>
+                        <InputNumber id="id" @bind-Value="updatedCar.Id" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="maker" class="form-label">Fabricante</label>
+                        <InputText id="maker" @bind-Value="updatedCar.Maker" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="model" class="form-label">Modelo</label>
+                        <InputText id="model" @bind-Value="updatedCar.Model" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dailyPrice" class="form-label">Preço</label>
+                        <InputNumber id="dailyPrice" @bind-Value="updatedCar.DailyPrice" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Ano</label>
+                        <InputNumber id="year" @bind-Value="updatedCar.Year" class="form-control" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar informações</button>
+                </EditForm>
+                @if (errorMessagePut != "")
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>@errorMessagePut</li>
+                        </ul>
+                    </div>
+                }
+            </div>
         </div>
     }
 </div>
@@ -56,7 +120,8 @@
                         <p class="card-text">@car.Maker - @car.Model - R$ @car.DailyPrice</p>
                     </div>
                     <div class="card-footer text-muted">
-                        <span>Disponível: @car.Available</span>
+                        <span>Disponível: @(car.Available ? "Sim" : "Não")</span>
+                        <button class="btn btn-secondary btn-sm" @onclick="() => LoadCarForEdit(car)">Editar</button>
                     </div>
                 </div>
             </div>

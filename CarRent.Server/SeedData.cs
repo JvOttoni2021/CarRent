@@ -60,8 +60,8 @@ namespace CarRent.Server
             {
                 angella = new IdentityUser
                 {
-                    UserName = "angella",
-                    Email = "angella.freeman@email.com",
+                    UserName = "ottoni",
+                    Email = "ottoni@email.com",
                     EmailConfirmed = true
                 };
                 var result = userMgr.CreateAsync(angella, "Pass123$").Result;
@@ -75,10 +75,10 @@ namespace CarRent.Server
                         angella,
                         new Claim[]
                         {
-                            new Claim(JwtClaimTypes.Name, "Angella Freeman"),
-                            new Claim(JwtClaimTypes.GivenName, "Angella"),
-                            new Claim(JwtClaimTypes.FamilyName, "Freeman"),
-                            new Claim(JwtClaimTypes.WebSite, "http://angellafreeman.com"),
+                            new Claim(JwtClaimTypes.Name, "Joao Ottoni"),
+                            new Claim(JwtClaimTypes.GivenName, "Joao"),
+                            new Claim(JwtClaimTypes.FamilyName, "Ottoni"),
+                            new Claim(JwtClaimTypes.WebSite, "http://ottoni.com"),
                             new Claim("location", "somewhere")
                         }
                     ).Result;

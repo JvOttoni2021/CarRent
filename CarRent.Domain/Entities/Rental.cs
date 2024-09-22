@@ -2,7 +2,7 @@
 {
     public class Rental
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public virtual Car RentedCar { get; set; }
         public virtual Customer Customer { get; set; }
         public DateTime RentalDate { get; set; }

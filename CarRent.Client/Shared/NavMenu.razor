@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">CarRent.Client</a>
+        <a class="navbar-brand" href="">Locadora</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,7 +20,28 @@
             <nav class="flex-column">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="car" Match="NavLinkMatch.All">
-                        <span class="oi oi-map" aria-hidden="true"></span> Carros
+                        <span class="oi oi-arrow-right" aria-hidden="true"></span> Carros
+                    </NavLink>
+                </div>
+            </nav>
+            <nav class="flex-column">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="customer" Match="NavLinkMatch.All">
+                        <span class="oi oi-arrow-right" aria-hidden="true"></span> Clientes
+                    </NavLink>
+                </div>
+            </nav>
+            <nav class="flex-column">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="rental" Match="NavLinkMatch.All">
+                        <span class="oi oi-arrow-right" aria-hidden="true"></span> Locações
+                    </NavLink>
+                </div>
+            </nav>
+            <nav class="flex-column">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="paymentReceipt" Match="NavLinkMatch.All">
+                        <span class="oi oi-arrow-right" aria-hidden="true"></span> Pagamentos
                     </NavLink>
                 </div>
             </nav>
