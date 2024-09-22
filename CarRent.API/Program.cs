@@ -7,8 +7,35 @@ using CarRent.Application.Services;
 using CarRent.Domain.Interfaces;
 using CarRent.Infraestructure.Repositories;
 using CarRent.Application.Behavior;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Protected API", Version = "v1" });
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows
+        {
+            AuthorizationCode = new OpenApiOAuthFlow
+            {
+                AuthorizationUrl = new Uri("https://localhost:7271/connect/authorize"),
+                TokenUrl = new Uri("https://localhost:7271/connect/token"),
+                Scopes = new Dictionary<string, string>
+            {
+                {"CarRentAPI.read", "Read"},
+                {"CarRentAPI.write", "Write" }
+            }
+            }
+        }
+    });
+    c.OperationFilter<AuthorizeCheckOperationFilter>();
+});
 
 builder.Services.AddScoped<RentService>();
 builder.Services.AddScoped<PaymentService>();
@@ -49,8 +76,6 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBeh
 
 builder.Services.AddValidatorsFromAssembly(typeof(CarRent.Application.Validators.CreateCarCommandValidator).Assembly);
 
-builder.Services.AddEndpointsApiExplorer();
-
 var app = builder.Build();
 
 app.UseMiddleware<GlobalExceptionHandler>();
@@ -59,6 +84,16 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+
+    options.OAuthClientId("demo_api_swagger");
+    options.OAuthAppName("Demo API - Swagger");
+    options.OAuthUsePkce();
+});
 
 app.MapControllers();
 

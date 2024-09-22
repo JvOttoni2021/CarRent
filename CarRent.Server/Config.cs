@@ -54,6 +54,20 @@ namespace CarRent.Server
                     RequirePkce = true,
                     RequireConsent = true,
                     AllowPlainTextPkce = false
+                },
+                new Client
+                {
+                    ClientId = "demo_api_swagger",
+                    ClientName = "Swagger UI for demo_api",
+                    ClientSecrets = {new Secret("ClientSecret1".Sha256())},
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    RedirectUris = {"https://localhost:7208/swagger/oauth2-redirect.html"},
+                    AllowedCorsOrigins = {"https://localhost:7208"},
+                    AllowedScopes = { "openid", "profile", "CarRentAPI.read", "CarRentAPI.write" }
                 }
             };
     }

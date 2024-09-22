@@ -55,7 +55,7 @@ namespace CarRent.Server
         {
             var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            var angella = userMgr.FindByNameAsync("angella").Result;
+            var angella = userMgr.FindByNameAsync("ottoni").Result;
             if (angella == null)
             {
                 angella = new IdentityUser
