@@ -112,3 +112,8 @@ C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net6.0\refint\CarR
 C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net6.0\CarRent.API.pdb
 C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net6.0\CarRent.API.genruntimeconfig.cache
 C:\Users\João\source\repos\CarRent.API\CarRent.API\obj\Debug\net6.0\ref\CarRent.API.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net6.0\IdentityModel.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net6.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net6.0\IdentityServer4.AccessTokenValidation.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.API\bin\Debug\net6.0\Newtonsoft.Json.dll

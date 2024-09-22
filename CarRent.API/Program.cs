@@ -38,6 +38,13 @@ builder.Services.AddScoped<IPaymentReceiptRepository, PaymentReceiptRepository>(
 
 builder.Services.AddControllers();
 
+builder.Services.AddAuthentication("Bearer")
+    .AddIdentityServerAuthentication("Bearer", options =>
+    {
+        options.Authority = "https://localhost:7271";
+        options.ApiName = "CarRentAPI";
+    });
+
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 builder.Services.AddValidatorsFromAssembly(typeof(CarRent.Application.Validators.CreateCarCommandValidator).Assembly);
@@ -50,6 +57,7 @@ app.UseMiddleware<GlobalExceptionHandler>();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

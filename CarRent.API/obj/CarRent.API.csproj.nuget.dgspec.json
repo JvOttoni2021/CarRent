@@ -72,6 +72,10 @@
               "target": "Package",
               "version": "[11.10.0, )"
             },
+            "IdentityServer4.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.4.1, )"

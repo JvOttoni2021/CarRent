@@ -1,0 +1,70 @@
+﻿@page "/car"
+@attribute [Authorize]
+
+<h3>Cars</h3>
+
+<div>
+    <h4>Adicionar Carro</h4>
+    <EditForm Model="newCar" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="maker" class="form-label">Fabricante</label>
+            <InputText id="maker" @bind-Value="newCar.Maker" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="model" class="form-label">Modelo</label>
+            <InputText id="model" @bind-Value="newCar.Model" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="dailyPrice" class="form-label">Preço</label>
+            <InputNumber id="dailyPrice" @bind-Value="newCar.DailyPrice" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="year" class="form-label">Ano</label>
+            <InputNumber id="year" @bind-Value="newCar.Year" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Adicionar Carro</button>
+    </EditForm>
+    @if (errorMessages.Any())
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var message in errorMessages)
+                {
+                    <li>@message</li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+
+<div class="row">
+    @if (CarList.Any())
+    {
+        @foreach (var car in CarList)
+        {
+            <div class="col-6 col-sm-12 col-md-6 col-lg-4 col-xl-4 mh-25 mb-4">
+                <div class="card shadow-sm rounded">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>@car.Id</b></h5>
+                        <p class="card-text">@car.Maker - @car.Model - R$ @car.DailyPrice</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span>Disponível: @car.Available</span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Nenhum carro encontrado.</p>
+    }
+
+</div>

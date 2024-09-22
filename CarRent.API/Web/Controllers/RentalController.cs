@@ -3,12 +3,14 @@ using CarRent.Application.Commands.RentalCommands;
 using CarRent.Application.Dtos;
 using CarRent.Application.Queries.RentalQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRent.API.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RentalController : ControllerBase
     {
         private readonly ISender _sender;

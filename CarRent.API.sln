@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRent.Application", "CarR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRent.Infrastructure", "CarRent.Infrastructure\CarRent.Infrastructure.csproj", "{9873D839-3FAF-4FF9-BBAF-99E22A597644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRent.Server", "CarRent.Server\CarRent.Server.csproj", "{C2BADA76-FF15-469F-8F23-8933F965AE0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRent.Server", "CarRent.Server\CarRent.Server.csproj", "{C2BADA76-FF15-469F-8F23-8933F965AE0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRent.Client", "CarRent.Client\CarRent.Client.csproj", "{79653D75-BA8D-46E5-A226-BAECADA3D5BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C2BADA76-FF15-469F-8F23-8933F965AE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2BADA76-FF15-469F-8F23-8933F965AE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2BADA76-FF15-469F-8F23-8933F965AE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79653D75-BA8D-46E5-A226-BAECADA3D5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79653D75-BA8D-46E5-A226-BAECADA3D5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79653D75-BA8D-46E5-A226-BAECADA3D5BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79653D75-BA8D-46E5-A226-BAECADA3D5BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

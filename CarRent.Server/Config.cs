@@ -24,7 +24,7 @@ namespace CarRent.Server
             {
                 new ApiResource("CarRentAPI")
                 {
-                    Scopes = new List<string> { "CarRentAPI.read", "CarRentAPI" },
+                    Scopes = new List<string> { "CarRentAPI.read", "CarRentAPI.write" },
                     ApiSecrets = new List<Secret> { new Secret("ScopeSecret".Sha256()) },
                     UserClaims = new List<string> { "role" }
                 }
@@ -46,11 +46,11 @@ namespace CarRent.Server
                     ClientId = "interactive",
                     ClientSecrets = { new Secret("ClientSecret1".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "https://localhost:5444/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:5444/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:5444/signout-callback-oidc" },
+                    RedirectUris = { "https://localhost:7086/signin-oidc"},
+                    FrontChannelLogoutUri = "https://localhost:7086/signout-oidc",
+                    PostLogoutRedirectUris = { "https://localhost:7086/signout-callback-oidc" },
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "CarRentAPI.read" },
+                    AllowedScopes = { "openid", "profile", "CarRentAPI.read", "CarRentAPI.write" },
                     RequirePkce = true,
                     RequireConsent = true,
                     AllowPlainTextPkce = false

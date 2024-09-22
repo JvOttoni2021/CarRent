@@ -3,12 +3,14 @@ using CarRent.API.Dtos;
 using CarRent.Application.Commands.CarCommands;
 using CarRent.Application.Queries.CarQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRent.API.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CarController : ControllerBase
     {
         private readonly ISender _sender;

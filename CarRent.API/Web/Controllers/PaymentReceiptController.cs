@@ -4,12 +4,14 @@ using CarRent.Application.Queries.CustomerQueries;
 using CarRent.Application.Queries.PaymentReceiptQueries;
 using CarRent.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRent.API.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PaymentReceiptController : ControllerBase
     {
         private readonly ISender _sender;

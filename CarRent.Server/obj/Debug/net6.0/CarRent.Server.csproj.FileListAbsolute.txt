@@ -77,3 +77,9 @@ C:\Users\João\source\repos\CarRent.API\CarRent.Server\obj\Debug\net6.0\refint\C
 C:\Users\João\source\repos\CarRent.API\CarRent.Server\obj\Debug\net6.0\CarRent.Server.pdb
 C:\Users\João\source\repos\CarRent.API\CarRent.Server\obj\Debug\net6.0\CarRent.Server.genruntimeconfig.cache
 C:\Users\João\source\repos\CarRent.API\CarRent.Server\obj\Debug\net6.0\ref\CarRent.Server.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.Server\obj\Debug\net6.0\CarRent.Server.RazorAssemblyInfo.cache
+C:\Users\João\source\repos\CarRent.API\CarRent.Server\obj\Debug\net6.0\CarRent.Server.RazorAssemblyInfo.cs
+C:\Users\João\source\repos\CarRent.API\CarRent.Server\bin\Debug\net6.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.Server\bin\Debug\net6.0\Microsoft.AspNetCore.Components.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.Server\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Authorization.dll
+C:\Users\João\source\repos\CarRent.API\CarRent.Server\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll

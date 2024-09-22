@@ -10,9 +10,9 @@ namespace CarRent.Application.Services
     {
         private readonly ICarRepository _carRepository;
         private readonly IMediator _mediator;
-        private readonly ILogger _logger;
+        private readonly ILogger<CarReturnedService> _logger;
 
-        public CarReturnedService(ICarRepository carRepository, IMediator mediator, ILogger logger)
+        public CarReturnedService(ICarRepository carRepository, IMediator mediator, ILogger<CarReturnedService> logger)
         {
             _carRepository = carRepository;
             _mediator = mediator;
