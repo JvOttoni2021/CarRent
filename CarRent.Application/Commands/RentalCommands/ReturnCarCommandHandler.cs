@@ -17,7 +17,7 @@ namespace CarRent.Application.Commands.RentalCommands
         }
         public async Task<Rental?> Handle(ReturnCarCommand request, CancellationToken cancellationToken)
         {
-            Rental? rental = _rentalRepository.GetRentalById(request.Id);
+            Rental? rental = _rentalRepository.GetRentalById(request.RentalId);
 
             if (rental is null)
             {

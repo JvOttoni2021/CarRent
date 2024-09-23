@@ -42,5 +42,18 @@ namespace CarRent.API.Web.Controllers
 
             return Ok(_mapper.Map<PaymentReceiptDto>(paymentReceipt));
         }
+
+        [HttpGet("rental/{RentalId}")]
+        public async Task<IActionResult> GetPaymentReceiptByRentalId(int RentalId)
+        {
+            var paymentReceipt = await _sender.Send(new GetPaymentReceiptByRentalIdQuery(RentalId));
+
+            if (!paymentReceipt.Any())
+            {
+                return NoContent();
+            }
+
+            return Ok(_mapper.Map<IEnumerable<PaymentReceiptDto>>(paymentReceipt));
+        }
     }
 }

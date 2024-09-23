@@ -26,6 +26,12 @@ namespace CarRent.API.Web.Controllers
         public async Task<IActionResult> GetCars()
         {
             var cars = await _sender.Send(new GetCarsQuery());
+
+            if (!cars.Any())
+            {
+                return NoContent();
+            }
+
             return Ok(_mapper.Map<IEnumerable<CarDto>>(cars));
         }
 

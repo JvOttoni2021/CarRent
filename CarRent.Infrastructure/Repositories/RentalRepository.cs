@@ -65,5 +65,19 @@ namespace CarRent.Infraestructure.Repositories
 
             return rental;
         }
+
+        public async Task<int> UpdateRentalDatesById(int RentalId, DateTime RentalDate, DateTime ExpectedReturnDate)
+        {
+            Rental updatedRental = GetRentalById(RentalId);
+
+            updatedRental.RentalDate = RentalDate;
+            updatedRental.ExpectedReturnDate = ExpectedReturnDate;
+
+            _context.Rentals.Update(updatedRental);
+
+            await _context.SaveChangesAsync();
+
+            return updatedRental.Id;
+        }
     }
 }

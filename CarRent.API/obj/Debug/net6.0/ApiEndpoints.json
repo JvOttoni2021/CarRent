@@ -136,6 +136,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CarRent.API.Web.Controllers.PaymentReceiptController",
+    "Method": "GetPaymentReceiptByRentalId",
+    "RelativePath": "api/PaymentReceipt/rental/{RentalId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RentalId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CarRent.API.Web.Controllers.RentalController",
     "Method": "GetRentals",
     "RelativePath": "api/Rental",
@@ -163,7 +179,7 @@
   },
   {
     "ContainingType": "CarRent.API.Web.Controllers.RentalController",
-    "Method": "ReturnCar",
+    "Method": "UpdateRentalById",
     "RelativePath": "api/Rental",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -171,7 +187,7 @@
     "Parameters": [
       {
         "Name": "command",
-        "Type": "CarRent.Application.Commands.RentalCommands.ReturnCarCommand",
+        "Type": "CarRent.Application.Commands.RentalCommands.UpdateRentalByIdCommand",
         "IsRequired": true
       }
     ],
@@ -188,6 +204,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CarRent.API.Web.Controllers.RentalController",
+    "Method": "ReturnCar",
+    "RelativePath": "api/Rental/return",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CarRent.Application.Commands.RentalCommands.ReturnCarCommand",
         "IsRequired": true
       }
     ],

@@ -28,6 +28,12 @@ namespace CarRent.API.Web.Controllers
         public async Task<IActionResult> GetRentals()
         {
             var rentals = await _sender.Send(new GetRentalsQuery());
+
+            if (!rentals.Any())
+            {
+                return NoContent();
+            }
+
             return Ok(_mapper.Map<IEnumerable<RentalDto>>(rentals));
         }
 
@@ -57,7 +63,7 @@ namespace CarRent.API.Web.Controllers
             return Ok(rentalToReturn.Id);
         }
 
-        [HttpPut]
+        [HttpPut("return")]
         public async Task<ActionResult> ReturnCar(ReturnCarCommand command)
         {
             _logger.LogInformation("Requisição recebida - Devolução de automóvel");
@@ -71,6 +77,14 @@ namespace CarRent.API.Web.Controllers
 
             _logger.LogInformation("Requisição finalizada - Devolução de automóvel");
             return Ok(rentalToReturn.Id);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateRentalById(UpdateRentalByIdCommand command)
+        {
+            var rentalId = await _sender.Send(command);
+
+            return Ok(rentalId);
         }
     }
 }

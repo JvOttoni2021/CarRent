@@ -11,7 +11,5 @@ namespace CarRent.Application.Dtos
         public DateTime ExpectedReturnDate { get; set; }
         public DateTime? ReturnDate { get; set; }
         public bool CarReturned { get; set; }
-        public int CarId { get; set; }
-        public int CustomerId { get; set; }
     }
 }

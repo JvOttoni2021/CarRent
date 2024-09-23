@@ -45,5 +45,10 @@ namespace CarRent.Infraestructure.Repositories
         {
             return _context.PaymentReceipts.ToArray();
         }
+
+        public IEnumerable<PaymentReceipt?> GetPaymentReceiptsByRentalId(int RentalId)
+        {
+            return _context.PaymentReceipts.Where(c => c.Rental.Id == RentalId).ToArray();
+        }
     }
 }
