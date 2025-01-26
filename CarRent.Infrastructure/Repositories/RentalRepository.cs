@@ -3,6 +3,7 @@ using CarRent.Domain.Interfaces;
 using CarRent.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Runtime.CompilerServices;
 
 namespace CarRent.Infraestructure.Repositories
 {
@@ -15,6 +16,12 @@ namespace CarRent.Infraestructure.Repositories
         {
             _context = context;
             _logger = logger;
+        }
+
+        public async Task SaveChangesAsync(Rental rental)
+        {
+            _context.Rentals.Update(rental);
+            await _context.SaveChangesAsync();
         }
 
         public Rental? GetRentalById(int Id)
@@ -32,27 +39,10 @@ namespace CarRent.Infraestructure.Repositories
             return _context.Rentals.ToArray();
         }
 
-        public async Task<Rental> CreateRental(Car car, Customer customer, DateTime expectedReturnDate)
+        public async Task CreateRental(Rental rental)
         {
-            _logger.LogInformation($"Criando locação para carro {car.Id}.");
-            var rental = new Rental
-            {
-                RentedCar = car,
-                Customer = customer,
-                ExpectedReturnDate = expectedReturnDate,
-                RentalDate = DateTime.Now,
-                ReturnDate = null
-            };
-
-            _context.Entry(car).State = EntityState.Unchanged;
-            _context.Entry(customer).State = EntityState.Unchanged;
-
             _context.Rentals.Add(rental);
             await _context.SaveChangesAsync();
-
-            _logger.LogInformation($"Locação {rental.Id} criada.");
-
-            return rental;
         }
 
         public async Task<Rental> ReturnCar(Rental rental)

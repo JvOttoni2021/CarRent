@@ -1,5 +1,6 @@
 ﻿using CarRent.Domain.Entities;
 using CarRent.Domain.Events;
+using CarRent.Domain.Exceptions;
 using CarRent.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -29,22 +30,25 @@ namespace CarRent.Application.Commands.RentalCommands
 
         public async Task<Rental?> Handle(CreateRentalCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Requisição recebida - Criar locação");
-
-            Car? car = _carRepository.GetCarByIdAvailability(request.CarId, true);
-            Customer? customer = _customerRepository.GetCustomerById(request.CustomerId);
-
-            if (car is null || customer is null)
+            try
             {
-                return null;
+                _logger.LogInformation("Requisição recebida - Criar locação");
+
+                Car? car = _carRepository.GetCarByIdAvailability(request.CarId, true);
+                Customer? customer = _customerRepository.GetCustomerById(request.CustomerId);
+
+                Rental newRental = new Rental(car, customer, request.ExpectedReturnDate);
+                await _rentalRepository.CreateRental(newRental);
+
+                await _mediator.Publish(new RentalCreatedEvent(newRental.Id));
+
+                _logger.LogInformation("Requisição finalizada - Criar locação");
+                return newRental;
             }
-
-            Rental newRental = await _rentalRepository.CreateRental(car, customer, request.ExpectedReturnDate);
-
-            await _mediator.Publish(new RentalCreatedEvent(newRental.Id));
-
-            _logger.LogInformation("Requisição finalizada - Criar locação");
-            return newRental;
+            catch (DomainException ex) {
+                _logger.LogError(ex, "Ocorreu um erro ao criar a rental. Erro: {Message}", ex.Message);
+            }
+            return null;
         }
     }
 }

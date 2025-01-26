@@ -6,9 +6,9 @@ namespace CarRent.Application.Queries.CarQueries
 {
     public class GetCarByIdQueryHandler : IRequestHandler<GetCarByIdQuery, Car?>
     {
-        private readonly ICarRepository _carRepository;
+        private readonly IRentalRepository _carRepository;
 
-        public GetCarByIdQueryHandler(ICarRepository carRepository)
+        public GetCarByIdQueryHandler(IRentalRepository carRepository)
         {
             _carRepository = carRepository;
         }

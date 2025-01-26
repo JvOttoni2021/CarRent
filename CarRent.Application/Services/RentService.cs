@@ -8,14 +8,12 @@ namespace CarRent.Application.Services
 {
     public class RentService
     {
-        private readonly ICarRepository _carRepository;
         private readonly IRentalRepository _rentalRepository;
         private readonly IMediator _mediator;
         private readonly ILogger<RentService> _logger;
 
-        public RentService(ICarRepository carRepository, IRentalRepository rentalRepository, IMediator mediator, ILogger<RentService> logger)
+        public RentService(IRentalRepository rentalRepository, IMediator mediator, ILogger<RentService> logger)
         {
-            _carRepository = carRepository;
             _rentalRepository = rentalRepository;
             _mediator = mediator;
             _logger = logger;
@@ -24,16 +22,18 @@ namespace CarRent.Application.Services
 
         public async Task<Task> ProcessRentalCreation(int rentalId)
         {
-            _logger.LogInformation($"{rentalId} - Reservando carro para locação {rentalId}.");
-
+            _logger.LogInformation("{RentalId} - Reservando carro para locação.", rentalId);
 
             Rental? rental = _rentalRepository.GetRentalById(rentalId);
 
-            await _mediator.Publish(new PaymentEvent(rental));
+            if (rental == null) 
+                throw new ArgumentNullException(nameof(rentalId), $"Rental {rentalId} não encontrada.");
 
-            _ = _carRepository.setCarAvailability(rental.RentedCar.Id, false);
+            await _mediator.Publish(new PaymentEvent(rental!));
 
-            _logger.LogInformation($"{rentalId} - Carro {rental.RentedCar.Id} reservado.");
+            rental.RentedCar.ChangeAvailability(false);
+
+            _logger.LogInformation("{RentalId} - Carro {CarId} reservado.", rentalId, rental.RentedCar.Id);
             return Task.CompletedTask;
         }
     }

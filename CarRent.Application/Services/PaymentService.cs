@@ -6,11 +6,11 @@ namespace CarRent.Application.Services
 {
     public class PaymentService
     {
-        private readonly ICarRepository _carRepository;
+        private readonly IRentalRepository _carRepository;
         private readonly IPaymentReceiptRepository _paymentReceiptRepository;
         private readonly ILogger<PaymentService> _logger;
 
-        public PaymentService(ICarRepository carRepository, IPaymentReceiptRepository paymentReceiptRepository, ILogger<PaymentService> logger)
+        public PaymentService(IRentalRepository carRepository, IPaymentReceiptRepository paymentReceiptRepository, ILogger<PaymentService> logger)
         {
             _carRepository = carRepository;
             _paymentReceiptRepository = paymentReceiptRepository;

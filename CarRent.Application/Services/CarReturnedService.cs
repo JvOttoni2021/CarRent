@@ -8,23 +8,25 @@ namespace CarRent.Application.Services
 {
     public class CarReturnedService
     {
-        private readonly ICarRepository _carRepository;
+        private readonly IRentalRepository _rentalRepository;
         private readonly IMediator _mediator;
         private readonly ILogger<CarReturnedService> _logger;
 
-        public CarReturnedService(ICarRepository carRepository, IMediator mediator, ILogger<CarReturnedService> logger)
+        public CarReturnedService(IRentalRepository rentalRepository, IMediator mediator, ILogger<CarReturnedService> logger)
         {
-            _carRepository = carRepository;
+            _rentalRepository = rentalRepository;
             _mediator = mediator;
             _logger = logger;
         }
 
         public async Task ProcessCarReturn(Rental rental)
         {
-            _logger.LogInformation($"{rental.Id} - Tornando carro disponível novamente.");
-            await _carRepository.setCarAvailability(rental.RentedCar.Id, true);
+            _logger.LogInformation("{Rental} - Tornando carro disponível novamente.", rental.Id);
 
-            _logger.LogInformation($"{rental.Id} - Carro {rental.RentedCar.Id} agora está disponível.");
+            rental.RentedCar.ChangeAvailability(true);
+            await _rentalRepository.SaveChangesAsync(rental);
+
+            _logger.LogInformation("{Rental} - Carro {RentedCar} agora está disponível.", rental.Id, rental.RentedCar.Id);
             await _mediator.Publish(new PaymentEvent(rental));
         }
     }

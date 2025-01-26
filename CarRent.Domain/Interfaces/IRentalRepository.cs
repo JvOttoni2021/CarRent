@@ -8,7 +8,8 @@ namespace CarRent.Domain.Interfaces
         public Rental? GetRentalById(int id);
         public Rental? GetUnfinishedRentalById(int id);
         public Task<Rental> ReturnCar(Rental rental);
-        public Task<Rental> CreateRental(Car car, Customer customer, DateTime expectedRetunDate);
+        public Task CreateRental(Rental rental);
         public Task<int> UpdateRentalDatesById(int RentalId, DateTime RentalDate, DateTime ExpectedReturnDate);
+        public Task SaveChangesAsync(Rental rental);
     }
 }

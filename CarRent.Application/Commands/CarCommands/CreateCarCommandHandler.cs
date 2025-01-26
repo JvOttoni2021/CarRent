@@ -6,9 +6,9 @@ namespace CarRent.Application.Commands.CarCommands
 {
     public class CreateCarCommandHandler : IRequestHandler<CreateCarCommand, Car>
     {
-        private readonly ICarRepository _carRepository;
+        private readonly IRentalRepository _carRepository;
 
-        public CreateCarCommandHandler(ICarRepository carRepository)
+        public CreateCarCommandHandler(IRentalRepository carRepository)
         {
             _carRepository = carRepository;
         }

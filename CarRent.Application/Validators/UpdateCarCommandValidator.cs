@@ -6,8 +6,8 @@ namespace CarRent.API.Application.Validators
 {
     public class UpdateCarCommandValidator : AbstractValidator<UpdateCarCommand>
     {
-        private readonly ICarRepository _carRepository;
-        public UpdateCarCommandValidator(ICarRepository carRepository)
+        private readonly IRentalRepository _carRepository;
+        public UpdateCarCommandValidator(IRentalRepository carRepository)
         {
             _carRepository = carRepository;
 
