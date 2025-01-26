@@ -18,7 +18,7 @@ namespace CarRent.API.Web.Controllers
 
         public CustomerController(ISender sender, IMapper mapper)
         {
-            this._sender = sender;
+            _sender = sender;
             _mapper = mapper;
         }
 
@@ -45,7 +45,7 @@ namespace CarRent.API.Web.Controllers
                 return BadRequest();
             }
 
-            return Ok(customer.Id);
+            return CreatedAtAction(nameof(CreateCustomer), _mapper.Map<CustomerDto>(customer));
         }
 
         [HttpGet("{id}")]

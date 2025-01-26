@@ -17,13 +17,9 @@ namespace CarRent.Infrastructure.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Car>()
-                .Property(c => c.DailyPrice)
-                .HasColumnType("decimal(18,2)");
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CarRentContext).Assembly);
 
-            modelBuilder.Entity<PaymentReceipt>()
-                .Property(p => p.RentValue)
-                .HasColumnType("decimal(18,2)");
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

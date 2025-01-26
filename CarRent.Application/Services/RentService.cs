@@ -20,18 +20,16 @@ namespace CarRent.Application.Services
         }
 
 
-        public async Task<Task> ProcessRentalCreation(int rentalId)
+        public async Task<Task> ProcessRentalCreation(Rental rental)
         {
+            int rentalId = rental.Id;
+
             _logger.LogInformation("{RentalId} - Reservando carro para locação.", rentalId);
-
-            Rental? rental = _rentalRepository.GetRentalById(rentalId);
-
-            if (rental == null) 
-                throw new ArgumentNullException(nameof(rentalId), $"Rental {rentalId} não encontrada.");
 
             await _mediator.Publish(new PaymentEvent(rental!));
 
-            rental.RentedCar.ChangeAvailability(false);
+            rental.RentedCar!.ChangeAvailability(false);
+            await _rentalRepository.Update(rental);
 
             _logger.LogInformation("{RentalId} - Carro {CarId} reservado.", rentalId, rental.RentedCar.Id);
             return Task.CompletedTask;

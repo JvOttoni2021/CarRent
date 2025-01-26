@@ -13,9 +13,9 @@ namespace CarRent.Application.Queries.CustomerQueries
             _customerRepository = customerRepository;
         }
 
-        public async Task<Customer?> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+        public Task<Customer?> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
         {
-            return _customerRepository.GetCustomerById(request.Id);
+            return Task.FromResult(_customerRepository.GetCustomerById(request.Id));
         }
     }
 }

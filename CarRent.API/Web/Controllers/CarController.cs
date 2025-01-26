@@ -58,7 +58,7 @@ namespace CarRent.API.Web.Controllers
                 return BadRequest();
             }
 
-            return Ok(car.Id);
+            return CreatedAtAction(nameof(CreateCar), _mapper.Map<CarDto>(car));
         }
 
         [HttpPut]

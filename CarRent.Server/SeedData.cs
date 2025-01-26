@@ -55,16 +55,16 @@ namespace CarRent.Server
         {
             var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            var angella = userMgr.FindByNameAsync("ottoni").Result;
-            if (angella == null)
+            var ottoni = userMgr.FindByNameAsync("ottoni").Result;
+            if (ottoni == null)
             {
-                angella = new IdentityUser
+                ottoni = new IdentityUser
                 {
                     UserName = "ottoni",
                     Email = "ottoni@email.com",
                     EmailConfirmed = true
                 };
-                var result = userMgr.CreateAsync(angella, "Pass123$").Result;
+                var result = userMgr.CreateAsync(ottoni, "Pass123$").Result;
                 if (!result.Succeeded)
                 {
                     throw new Exception(result.Errors.First().Description);
@@ -72,7 +72,7 @@ namespace CarRent.Server
 
                 result =
                     userMgr.AddClaimsAsync(
-                        angella,
+                        ottoni,
                         new Claim[]
                         {
                             new Claim(JwtClaimTypes.Name, "Joao Ottoni"),

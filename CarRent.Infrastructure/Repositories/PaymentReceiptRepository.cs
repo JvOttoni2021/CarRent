@@ -9,31 +9,16 @@ namespace CarRent.Infraestructure.Repositories
     public class PaymentReceiptRepository : IPaymentReceiptRepository
     {
         private readonly CarRentContext _context;
-        private readonly ILogger<PaymentReceiptRepository> _logger;
 
-        public PaymentReceiptRepository(CarRentContext context, ILogger<PaymentReceiptRepository> logger)
+        public PaymentReceiptRepository(CarRentContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
-        public async Task CreatePaymentReceipt(Rental Rental, decimal RentValue, string Observation)
+        public async Task CreatePaymentReceipt(PaymentReceipt paymentReceipt)
         {
-            _logger.LogInformation($"{Rental.Id} - Criando recibo para locação {Rental.Id}.");
-
-            PaymentReceipt newPayment = new PaymentReceipt
-            {
-                Rental = Rental,
-                Observation = Observation,
-                Emission = DateTime.Now,
-                RentValue = RentValue
-            };
-
-            _context.Entry(Rental).State = EntityState.Unchanged;
-            _context.PaymentReceipts.Add(newPayment);
+            _context.PaymentReceipts.Add(paymentReceipt);
             await _context.SaveChangesAsync();
-
-            _logger.LogInformation($"{Rental.Id} - Recibo {newPayment.Id} criado.");
         }
 
         public PaymentReceipt? GetPaymentById(int id)
@@ -46,9 +31,9 @@ namespace CarRent.Infraestructure.Repositories
             return _context.PaymentReceipts.ToArray();
         }
 
-        public IEnumerable<PaymentReceipt?> GetPaymentReceiptsByRentalId(int RentalId)
+        public IEnumerable<PaymentReceipt> GetPaymentReceiptsByRentalId(int RentalId)
         {
-            return _context.PaymentReceipts.Where(c => c.Rental.Id == RentalId).ToArray();
+            return _context.PaymentReceipts.Where(c => c.Rental!.Id == RentalId).ToArray();
         }
     }
 }

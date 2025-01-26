@@ -6,12 +6,16 @@ namespace CarRent.Domain.Entities
     public class Rental
     {
         public int Id { get; }
+        public int IdRentedCar { get; }
+        public int IdCustomer { get; }
         public virtual Car? RentedCar { get; init; }
         public virtual Customer? Customer { get; init; }
         public DateTime RentalDate { get; private set; } = DateTime.Now;
         public DateTime ExpectedReturnDate { get; set; }
         public DateTime? ReturnDate { get; private set; } = null;
         public bool CarReturned { get; private set; } = false;
+
+        protected Rental() { }
 
         public Rental(Car? car, Customer? customer, DateTime expectedReturnDate)
         {

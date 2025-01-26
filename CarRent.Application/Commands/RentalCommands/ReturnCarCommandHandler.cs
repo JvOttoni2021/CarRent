@@ -2,6 +2,7 @@
 using CarRent.Domain.Events;
 using CarRent.Domain.Interfaces;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace CarRent.Application.Commands.RentalCommands
 {
@@ -9,25 +10,29 @@ namespace CarRent.Application.Commands.RentalCommands
     {
         private readonly IRentalRepository _rentalRepository;
         private readonly IMediator _mediator;
+        private readonly ILogger<ReturnCarCommandHandler> _logger;
 
-        public ReturnCarCommandHandler(IRentalRepository rentalRepository, IMediator mediator)
+        public ReturnCarCommandHandler(IRentalRepository rentalRepository, IMediator mediator, ILogger<ReturnCarCommandHandler> logger)
         {
             _rentalRepository = rentalRepository;
             _mediator = mediator;
+            _logger = logger;
         }
         public async Task<Rental?> Handle(ReturnCarCommand request, CancellationToken cancellationToken)
         {
-            Rental? rental = _rentalRepository.GetRentalById(request.RentalId);
+            _logger.LogInformation("Requisição recebida - Devolução de automóvel");
+            Rental? rental = _rentalRepository.GetUnfinishedRentalById(request.RentalId);
 
             if (rental is null)
-            {
                 return null;
-            }
 
-            await _rentalRepository.ReturnCar(rental);
+            rental.ReturnCar();
+
+            await _rentalRepository.Update(rental);
 
             await _mediator.Publish(new CarReturnedEvent(rental));
 
+            _logger.LogInformation("Requisição finalizada - Devolução de automóvel");
             return rental;
         }
     }

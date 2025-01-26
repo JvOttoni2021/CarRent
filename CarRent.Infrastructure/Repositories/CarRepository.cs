@@ -24,13 +24,12 @@ namespace CarRent.Infraestructure.Repositories
         public async Task CreateCar(Car car) {
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();
-        };
+        }
 
         public async Task UpdateCar(Car car)
         {
             _context.Cars.Update(car);
             await _context.SaveChangesAsync();
-
         }
     }
 }

@@ -18,25 +18,14 @@ namespace CarRent.Infraestructure.Repositories
             return _context.Customers.ToArray();
         }
 
-        public bool CpfExists(string cpf)
-        {
-            return _context.Customers.Any(c => c.Cpf == cpf);
-        }
+        public Customer? GetCustomerByCpf(string cpf) => _context.Customers.Where(c => c.Cpf == cpf).FirstOrDefault();
 
         public Customer? GetCustomerById(int id) => _context.Customers.Where(c => c.Id == id).FirstOrDefault();
 
-        public async Task<Customer> CreateCustomer(string name, string cpf)
+        public async Task CreateCustomer(Customer customer)
         {
-            var newCustomer = new Customer
-            {
-                Name = name,
-                Cpf = cpf
-            };
-
-            _context.Customers.Add(newCustomer);
+            _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
-
-            return newCustomer;
         }
     }
 }

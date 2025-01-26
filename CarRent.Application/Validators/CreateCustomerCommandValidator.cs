@@ -19,7 +19,7 @@ namespace CarRent.API.Application.Validators
             RuleFor(p => p.Cpf)
                 .Must(id =>
                 {
-                    return !_customerRepository.CpfExists(id);
+                    return _customerRepository.GetCustomerByCpf(id) is null;
                 }).WithMessage("Cpf já cadastrado.")
                 .NotNull().WithMessage("Cpf não informado.")
                 .Length(1, 11).WithMessage("Cpf deve ter entre 1 e 11 caracteres.");

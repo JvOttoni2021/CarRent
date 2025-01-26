@@ -18,9 +18,9 @@ namespace CarRent.Application.Queries.PaymentReceiptQueries
             _paymentReceiptRepository = paymentReceiptRepository;
         }
 
-        public async Task<IEnumerable<PaymentReceipt?>> Handle(GetPaymentReceiptByRentalIdQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<PaymentReceipt?>> Handle(GetPaymentReceiptByRentalIdQuery request, CancellationToken cancellationToken)
         {
-            return _paymentReceiptRepository.GetPaymentReceiptsByRentalId(request.RentalId);
+            return Task.FromResult(_paymentReceiptRepository.GetPaymentReceiptsByRentalId(request.RentalId));
         }
     }
 }

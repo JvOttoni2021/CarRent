@@ -15,7 +15,7 @@ namespace CarRent.Application.Handlers
 
         public async Task Handle(RentalCreatedEvent notification, CancellationToken cancellationToken)
         {
-            await _rentService.ProcessRentalCreation(notification.RentalId);
+            await _rentService.ProcessRentalCreation(notification.Rental);
         }
     }
 }

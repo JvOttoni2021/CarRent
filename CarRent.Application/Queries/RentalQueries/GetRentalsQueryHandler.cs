@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CarRent.Application.Queries.RentalQueries
 {
-    public class GetRentalsQueryHandler : IRequestHandler<GetRentalsQuery, IEnumerable<Rental>?>
+    public class GetRentalsQueryHandler : IRequestHandler<GetRentalsQuery, IEnumerable<Rental>>
     {
         private readonly IRentalRepository _rentalRepository;
 
@@ -13,7 +13,7 @@ namespace CarRent.Application.Queries.RentalQueries
             _rentalRepository = rentalRepository;
         }
 
-        public async Task<IEnumerable<Rental>?> Handle(GetRentalsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Rental>> Handle(GetRentalsQuery request, CancellationToken cancellationToken)
         {
             return _rentalRepository.GetRentals();
         }

@@ -15,13 +15,11 @@ namespace CarRent.API.Web.Controllers
     {
         private readonly ISender _sender;
         private readonly IMapper _mapper;
-        private readonly ILogger<RentalController> _logger;
 
-        public RentalController(ISender sender, IMapper mapper, ILogger<RentalController> logger)
+        public RentalController(ISender sender, IMapper mapper)
         {
             _sender = sender;
             _mapper = mapper;
-            _logger = logger;
         }
 
         [HttpGet]
@@ -63,28 +61,18 @@ namespace CarRent.API.Web.Controllers
             return Ok(rentalToReturn.Id);
         }
 
-        [HttpPut("return")]
-        public async Task<ActionResult> ReturnCar(ReturnCarCommand command)
+        [HttpPut("return/{id}")]
+        public async Task<ActionResult> ReturnCar(int id)
         {
-            _logger.LogInformation("Requisição recebida - Devolução de automóvel");
+            ReturnCarCommand command = new ReturnCarCommand(id);
             var rentalToReturn = await _sender.Send(command);
 
             if (rentalToReturn is null)
             {
-                _logger.LogError("Erro na requisição - Devolução de automóvel");
-                return BadRequest();
+                return NotFound("Rental não encontrada.");
             }
 
-            _logger.LogInformation("Requisição finalizada - Devolução de automóvel");
             return Ok(rentalToReturn.Id);
-        }
-
-        [HttpPut]
-        public async Task<ActionResult> UpdateRentalById(UpdateRentalByIdCommand command)
-        {
-            var rentalId = await _sender.Send(command);
-
-            return Ok(rentalId);
         }
     }
 }

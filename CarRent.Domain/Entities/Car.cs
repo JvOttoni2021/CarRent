@@ -11,7 +11,9 @@ namespace CarRent.Domain.Entities
         public decimal DailyPrice { get; private set; }
         public bool Available { get; private set; } = true;
 
-        public Car(string? model, string? maker, int? year, decimal dailyPrice, bool available)
+        protected Car() { }
+
+        public Car(string? model, string? maker, int? year, decimal dailyPrice)
         {
             Model = model;
             Maker = maker;
@@ -26,12 +28,16 @@ namespace CarRent.Domain.Entities
             Available = available;
         }
 
-        public void UpdateMaker(string? maker)
+        public void Update(string? maker, string? model)
         {
             if (string.IsNullOrEmpty(maker))
                 throw new ArgumentNullException(nameof(maker), $"{nameof(maker)} não pode ser vazio");
 
+            if (string.IsNullOrEmpty(model))
+                throw new ArgumentNullException(nameof(model), $"{nameof(model)} não pode ser vazio");
+
             Maker = maker;
+            Model = model;
         }
 
         private void IsValid()

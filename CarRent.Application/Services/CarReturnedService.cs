@@ -23,8 +23,8 @@ namespace CarRent.Application.Services
         {
             _logger.LogInformation("{Rental} - Tornando carro disponível novamente.", rental.Id);
 
-            rental.RentedCar.ChangeAvailability(true);
-            await _rentalRepository.SaveChangesAsync(rental);
+            rental.RentedCar!.ChangeAvailability(true);
+            await _rentalRepository.Update(rental);
 
             _logger.LogInformation("{Rental} - Carro {RentedCar} agora está disponível.", rental.Id, rental.RentedCar.Id);
             await _mediator.Publish(new PaymentEvent(rental));

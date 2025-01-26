@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CarRent.Application.Queries.PaymentReceiptQueries
 {
-    public class GetPaymentReceiptsQueryHandler : IRequestHandler<GetPaymentReceiptsQuery, IEnumerable<PaymentReceipt>?>
+    public class GetPaymentReceiptsQueryHandler : IRequestHandler<GetPaymentReceiptsQuery, IEnumerable<PaymentReceipt>>
     {
         private readonly IPaymentReceiptRepository _paymentReceiptRepository;
 
@@ -13,9 +13,9 @@ namespace CarRent.Application.Queries.PaymentReceiptQueries
             _paymentReceiptRepository = paymentReceiptRepository;
         }
 
-        public async Task<IEnumerable<PaymentReceipt>?> Handle(GetPaymentReceiptsQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<PaymentReceipt>> Handle(GetPaymentReceiptsQuery request, CancellationToken cancellationToken)
         {
-            return _paymentReceiptRepository.GetPaymentReceipts();
+            return Task.FromResult(_paymentReceiptRepository.GetPaymentReceipts());
         }
     }
 }

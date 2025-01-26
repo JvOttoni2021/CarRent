@@ -6,66 +6,76 @@ namespace CarRent.Application.Services
 {
     public class PaymentService
     {
-        private readonly IRentalRepository _carRepository;
         private readonly IPaymentReceiptRepository _paymentReceiptRepository;
         private readonly ILogger<PaymentService> _logger;
 
-        public PaymentService(IRentalRepository carRepository, IPaymentReceiptRepository paymentReceiptRepository, ILogger<PaymentService> logger)
+        public PaymentService(IPaymentReceiptRepository paymentReceiptRepository, ILogger<PaymentService> logger)
         {
-            _carRepository = carRepository;
             _paymentReceiptRepository = paymentReceiptRepository;
             _logger = logger;
         }
 
         public async Task ProcessPayment(Rental rental)
         {
-            _logger.LogInformation($"{rental.Id} - Início de verificação de cobrança...");
+            _logger.LogInformation("{RentalId} - Início de verificação de cobrança...", rental.Id);
 
-            string paymentDescription = "";
-
-            // Lógica para verificar se será cobrança inicial ou juros
+            (decimal? price, string? description) result;
+            // Lógica para verificar se é a retirada ou devolução do automovel
             if (!rental.CarReturned)
             {
-                // Lógica para retirada inicial
-
-                DateTime rentalDate = rental.RentalDate;
-                DateTime expectedReturnDate = rental.ExpectedReturnDate;
-
-                int differenceInDays = (expectedReturnDate.Date - rentalDate.Date).Days;
-
-                decimal finalPrice = differenceInDays * rental.RentedCar.DailyPrice;
-
-                paymentDescription = "Pagamento inicial (Retirada).";
-
-                await _paymentReceiptRepository.CreatePaymentReceipt(rental, finalPrice, paymentDescription);
+                result = CalculateRent(rental);
             }
             else
             {
-                // Lógica para pagamento de juros de devolução atrasada
+                result = CalculateFees(rental);
 
-                DateTime expectedReturnDate = rental.ExpectedReturnDate;
-                DateTime realReturnDate = DateTime.Now;
-
-                bool lateReturn = realReturnDate > expectedReturnDate;
-
-                if (!lateReturn)
+                if (result.price is null)
                 {
-                    _logger.LogInformation($"{rental.Id} - Nenhuma cobrança necessária.");
+                    _logger.LogInformation("{RentalId} - Nenhuma cobrança adicional necessária.", rental.Id);
                     return;
                 }
+            }
+            PaymentReceipt paymentReceipt = new PaymentReceipt(rental, result.price, result.description);
+            await _paymentReceiptRepository.CreatePaymentReceipt(paymentReceipt);
 
-                int differenceInDays = (realReturnDate.Date - expectedReturnDate.Date).Days;
+            _logger.LogInformation("{RentalId} - Cobrança '{PaymentDescription}' gerada.", rental.Id, paymentReceipt.Observation);
+        }
 
-                // Cobrança normal + 10%
-                decimal finalPrice = differenceInDays * rental.RentedCar.DailyPrice * 1.10m;
+        private static (decimal? price, string? description) CalculateRent(Rental rental)
+        {
+            DateTime rentalDate = rental.RentalDate;
+            DateTime expectedReturnDate = rental.ExpectedReturnDate;
 
-                paymentDescription = "Pagamento de juros (Devolução atrasada).";
+            int differenceInDays = (expectedReturnDate.Date - rentalDate.Date).Days;
 
-                await _paymentReceiptRepository.CreatePaymentReceipt(rental, finalPrice, paymentDescription);
+            decimal? finalPrice = differenceInDays * rental.RentedCar!.DailyPrice;
+
+            string? paymentDescription = "Pagamento inicial (Retirada).";
+
+            return (finalPrice, paymentDescription);
+        }
+
+        private static (decimal? price, string? description) CalculateFees(Rental rental)
+        {
+            // Lógica para pagamento de juros de devolução atrasada
+            DateTime expectedReturnDate = rental.ExpectedReturnDate;
+            DateTime realReturnDate = DateTime.Now;
+
+            bool lateReturn = realReturnDate > expectedReturnDate;
+
+            if (!lateReturn)
+            {
+                return (null, null);
             }
 
+            int differenceInDays = (realReturnDate.Date - expectedReturnDate.Date).Days;
 
-            _logger.LogInformation($"{rental.Id} - Cobrança '{paymentDescription}' gerada para locação {rental.Id}.");
+            // Cobrança normal + 10%
+            decimal? finalPrice = differenceInDays * rental.RentedCar!.DailyPrice * 1.10m;
+
+            string? paymentDescription = "Pagamento de juros (Devolução atrasada).";
+
+            return (finalPrice, paymentDescription);
         }
     }
 }

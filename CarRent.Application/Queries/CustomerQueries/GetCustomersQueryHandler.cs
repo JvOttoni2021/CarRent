@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CarRent.Application.Queries.CustomerQueries
 {
-    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnumerable<Customer>?>
+    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, IEnumerable<Customer>>
     {
         private readonly ICustomerRepository _customerRepository;
 
@@ -13,9 +13,9 @@ namespace CarRent.Application.Queries.CustomerQueries
             _customerRepository = customerRepository;
         }
 
-        public async Task<IEnumerable<Customer>?> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<Customer>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
         {
-            return _customerRepository.GetCustomers();
+            return Task.FromResult(_customerRepository.GetCustomers());
         }
     }
 }

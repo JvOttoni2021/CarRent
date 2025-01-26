@@ -40,7 +40,7 @@ namespace CarRent.Application.Commands.RentalCommands
                 Rental newRental = new Rental(car, customer, request.ExpectedReturnDate);
                 await _rentalRepository.CreateRental(newRental);
 
-                await _mediator.Publish(new RentalCreatedEvent(newRental.Id));
+                await _mediator.Publish(new RentalCreatedEvent(newRental));
 
                 _logger.LogInformation("Requisição finalizada - Criar locação");
                 return newRental;

@@ -3,5 +3,5 @@ using MediatR;
 
 namespace CarRent.Application.Commands.CarCommands
 {
-    public record UpdateCarCommand(int Id, string Model, string Maker, int Year, decimal DailyPrice) : IRequest<Car> { }
+    public record UpdateCarCommand(int Id, string Model, string Maker, int Year, decimal DailyPrice) : IRequest<Car?> { }
 }
