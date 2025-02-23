@@ -14,10 +14,10 @@ namespace CarRent.Domain.Entities
             Name = nome;
             Cpf = cpf;
 
-            IsValid();
+            Validate();
         }
 
-        private void IsValid()
+        private void Validate()
         {
             if (string.IsNullOrEmpty(Name))
                 throw new DomainException($"{nameof(Name)} não pode ser vazio.");

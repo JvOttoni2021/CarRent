@@ -1,4 +1,5 @@
-﻿using CarRent.Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
+using CarRent.Domain.Entities;
 
 namespace CarRent.Domain.Interfaces
 {

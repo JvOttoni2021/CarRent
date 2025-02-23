@@ -23,16 +23,21 @@ namespace CarRent.Domain.Entities
             Customer = customer;
             ExpectedReturnDate = expectedReturnDate;
 
-            IsValid();
+            Validate();
         }
 
         public void ReturnCar()
         {
+            if (CarReturned)
+            {
+                throw new DomainException("Carro já foi retornado.");
+            }
+            
             ReturnDate = DateTime.Now;
             CarReturned = true;
         }
 
-        private void IsValid()
+        private void Validate()
         {
             if (RentedCar is null)
                 throw new DomainException($"{nameof(RentedCar)} não pode ser nulo");

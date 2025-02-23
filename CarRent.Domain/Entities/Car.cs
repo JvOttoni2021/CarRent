@@ -20,7 +20,7 @@ namespace CarRent.Domain.Entities
             Year = year;
             DailyPrice = dailyPrice;
 
-            IsValid();
+            Validate();
         }
 
         public void ChangeAvailability(bool available)
@@ -40,7 +40,7 @@ namespace CarRent.Domain.Entities
             Model = model;
         }
 
-        private void IsValid()
+        private void Validate()
         {
             if (string.IsNullOrEmpty(Model))
                 throw new DomainException($"{nameof(Model)} não pode ser vazio.");

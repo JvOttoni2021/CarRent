@@ -1,0 +1,4 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c75f4e7d_002Dbdf2_002D4e5d_002D9851_002D39b17cb878ae/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Deve jogar exception se dado inválido na criação" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;ProjectFolder&gt;30B5CE9E-74FC-4012-9728-C3C7F2B5BB1E/d:Domain&lt;/ProjectFolder&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
